@@ -426,7 +426,6 @@ class Yf {
 			return expression;
 		}
 	}
-
 	evaluateExpression(expression) {
 		console.log('Evaluating expression:', expression);
 		console.log('Current data:', this.data);

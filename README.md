@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](package.json)
 
-## Why YF Framework?
+## Why YF Framework ?
 
 YF Framework brings the power of reactive data binding, components, and routing to your web applications **without the complexity**. No build tools, no configuration, no dependencies - just pure JavaScript magic.
 
