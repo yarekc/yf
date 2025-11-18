@@ -1,7 +1,8 @@
 /**
  * Lightweight JS Framework with Data Binding and Routing
  */
-class Framework {
+console.log('');
+class Yf {
 	constructor() {
 		this.data = {};
 		this.states = {};
@@ -26,7 +27,7 @@ class Framework {
 		if (this.initialized) return;
 		this.initialized = true;
 
-		// CRITICAL: Store original attributes on ALL elements before any processing
+
 		this.storeOriginalAttributes();
 
 		this.loadComponents();
@@ -40,6 +41,13 @@ class Framework {
 		this.ready = true;
 		this.pendingOperations.forEach(fn => fn());
 		this.pendingOperations = [];
+
+		// CRITICAL FIX: Force update all bindings after initialization
+		requestAnimationFrame(() => {
+			this.bindings.forEach((elements, key) => {
+				this.updateBindings(key);
+			});
+		});
 	}
 	storeOriginalAttributes() {
 		// Store original attribute values for ALL elements before any processing
@@ -99,7 +107,12 @@ class Framework {
 
 		const oldValue = this.getNestedValue(this.data, key);
 
-		if (oldValue !== value) {
+		// Always update if value is an array or object, since internal properties may have changed
+		const shouldUpdate = (oldValue !== value) ||
+			(Array.isArray(value)) ||
+			(value && typeof value === 'object' && !Array.isArray(value));
+
+		if (shouldUpdate) {
 			this.setNestedValue(this.data, key, value);
 			this.updateBindings(key);
 
@@ -110,6 +123,11 @@ class Framework {
 					this.updateBindings(parentKey);
 				}
 			}
+
+			// Trigger data change event
+			window.dispatchEvent(new CustomEvent('yf-data-changed', {
+				detail: { key, value, oldValue }
+			}));
 		}
 	}
 
@@ -159,14 +177,28 @@ class Framework {
 			if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
 				if (!el._bindingHandler) {
 					el._bindingHandler = (e) => {
-						this.set(key, e.target.value);
+						// CRITICAL FIX: For checkboxes, use checked property
+						if (e.target.type === 'checkbox') {
+							this.set(key, e.target.checked);
+						} else {
+							this.set(key, e.target.value);
+						}
 					};
-					el.addEventListener('input', el._bindingHandler);
+
+					// Use 'change' event for checkboxes, 'input' for others
+					const eventType = el.type === 'checkbox' ? 'change' : 'input';
+					el.addEventListener(eventType, el._bindingHandler);
 				}
 
 				const currentValue = this.getNestedValue(this.data, key);
 				if (currentValue !== undefined) {
-					el.value = currentValue;
+					if (el.type === 'checkbox') {
+						el.checked = !!currentValue;
+					} else {
+						el.value = currentValue;
+					}
+				} else if (el.type === 'checkbox') {
+					this.set(key, el.checked);
 				} else if (el.value) {
 					this.set(key, el.value);
 				}
@@ -197,28 +229,35 @@ class Framework {
 
 		textNodes.forEach(node => {
 			const template = node.nodeValue;
-			const matches = template.match(/\{([\w.]+)\}/g);
+			// Updated regex to capture any expression, not just word characters
+			const matches = template.match(/\{([^}]+)\}/g);
 
 			if (matches) {
 				matches.forEach(match => {
-					const path = match.slice(1, -1);
+					const expression = match.slice(1, -1).trim(); // Remove { } and trim
 
-					if (!this.bindings.has(path)) {
-						this.bindings.set(path, new Set());
-					}
+					// Extract the base data key (first word before . or ()
+					const baseKey = expression.match(/^([\w]+)/);
+					if (baseKey) {
+						const path = baseKey[1];
 
-					if (!node._originalTemplate) {
-						node._originalTemplate = template;
-					}
+						if (!this.bindings.has(path)) {
+							this.bindings.set(path, new Set());
+						}
 
-					// Check if already in set
-					let alreadyBound = false;
-					this.bindings.get(path).forEach(existing => {
-						if (existing === node) alreadyBound = true;
-					});
+						if (!node._originalTemplate) {
+							node._originalTemplate = template;
+						}
 
-					if (!alreadyBound) {
-						this.bindings.get(path).add(node);
+						// Check if already in set
+						let alreadyBound = false;
+						this.bindings.get(path).forEach(existing => {
+							if (existing === node) alreadyBound = true;
+						});
+
+						if (!alreadyBound) {
+							this.bindings.get(path).add(node);
+						}
 					}
 				});
 			}
@@ -354,6 +393,40 @@ class Framework {
 		}
 	}
 
+	evaluateBinding(expression) {
+		// Check if it's a simple data key (e.g., "username")
+		if (/^[\w.]+$/.test(expression)) {
+			const value = this.getNestedValue(this.data, expression);
+			// If it's an object or array, return JSON stringified version
+			if (value !== undefined && typeof value === 'object') {
+				return JSON.stringify(value);
+			}
+			return value;
+		}
+
+		// Check if expression looks like an object literal (contains ':' or starts with '{')
+		if (expression.includes(':') && !expression.includes('?')) {
+			// This is likely an object literal, not a ternary expression
+			return expression;
+		}
+
+		// It's an expression (ternary, method call, etc.)
+		try {
+			// Create a safe context with the data object
+			const func = new Function('data', `with(data) { try { return ${expression}; } catch(e) { return undefined; } }`);
+			const result = func(this.data);
+			// If result is an object, stringify it
+			if (result !== undefined && typeof result === 'object') {
+				return JSON.stringify(result);
+			}
+			return result;
+		} catch (e) {
+			console.warn(`Failed to evaluate binding expression: ${expression}`, e);
+			// If evaluation fails, return the expression as-is
+			return expression;
+		}
+	}
+
 	evaluateExpression(expression) {
 		console.log('Evaluating expression:', expression);
 		console.log('Current data:', this.data);
@@ -363,7 +436,7 @@ class Framework {
 
 		// Find all potential data keys (word characters and dots)
 		const tokens = expression.match(/[\w.]+/g) || [];
-		console.log('Tokens found:', tokens);
+		//console.log('Tokens found:', tokens);
 
 		tokens.forEach(token => {
 			// Skip JavaScript keywords and boolean literals
@@ -372,17 +445,21 @@ class Framework {
 			}
 
 			const value = this.getNestedValue(this.data, token);
-			console.log(`Token "${token}" has value:`, value);
+			//console.log(`Token "${token}" has value:`, value);
 
 			if (value !== undefined) {
 				// Replace the token with the actual value
 				// For strings, wrap in quotes
 				const replacement = typeof value === 'string' ? `"${value}"` : value;
 				processedExpression = processedExpression.replace(new RegExp(`\\b${token}\\b`, 'g'), replacement);
+			} else {
+				// Replace undefined values with safe defaults to prevent ReferenceError
+				// For array.length or object properties, use 0 as default
+				processedExpression = processedExpression.replace(new RegExp(`\\b${token}\\b`, 'g'), '0');
 			}
 		});
 
-		console.log('Processed expression:', processedExpression);
+		//console.log('Processed expression:', processedExpression);
 
 		try {
 			// Safely evaluate the expression
@@ -400,7 +477,11 @@ class Framework {
 		if (!elements) return;
 
 		elements.forEach(el => {
-			if (el.isShow) {
+			if (el.isIterator) {
+				// Handle iterator bindings
+				this.renderIterator(el.element);
+			}
+			else if (el.isShow) {
 				this.evaluateShow(el.element, el.condition);
 			}
 			else if (el.isAttribute) {
@@ -417,15 +498,26 @@ class Framework {
 			}
 			else if (el.nodeType === Node.TEXT_NODE) {
 				const template = el._originalTemplate || el.nodeValue;
-				el.nodeValue = template.replace(/\{([\w.]+)\}/g, (match, k) => {
-					const value = this.getNestedValue(this.data, k);
+				el.nodeValue = template.replace(/\{([^}]+)\}/g, (match, expression) => {
+					expression = expression.trim();
+					const value = this.evaluateBinding(expression);
 					return value !== undefined ? value : match;
 				});
 			}
 			else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
 				const value = this.getNestedValue(this.data, key);
-				if (el.value !== value) {
-					el.value = value || '';
+
+				// CRITICAL FIX: Handle checkboxes specially
+				if (el.type === 'checkbox') {
+					el.checked = !!value; // Convert to boolean and set checked property
+				} else if (el.type === 'radio') {
+					// Radio buttons are handled via onclick, not data-bind
+					// Skip updating them here
+				} else {
+					// Regular inputs, textareas, selects
+					if (el.value !== value) {
+						el.value = value || '';
+					}
 				}
 			}
 			else {
@@ -633,25 +725,48 @@ class Framework {
 		arrayData.forEach((item, index) => {
 			let itemHtml = template;
 
-			// Replace {itemName.property} with actual values
-			itemHtml = itemHtml.replace(new RegExp(`\\{${itemName}\\.(\\w+)\\}`, 'g'), (match, prop) => {
-				return item[prop] !== undefined ? item[prop] : '';
-			});
+			// Replace any {itemName...} expressions
+			itemHtml = itemHtml.replace(new RegExp(`\\{(${itemName}[^}]*)\\}`, 'g'), (match, expression) => {
+				expression = expression.trim();
 
-			// Replace {itemName} with the whole item (if it's a primitive)
-			itemHtml = itemHtml.replace(new RegExp(`\\{${itemName}\\}`, 'g'), () => {
-				return typeof item === 'object' ? JSON.stringify(item) : item;
+				// Evaluate the expression with the item as context
+				try {
+					// Replace itemName with actual item reference
+					const jsExpression = expression.replace(new RegExp(`^${itemName}\\.?`), 'item.');
+					const func = new Function('item', `return ${jsExpression};`);
+					const result = func(item);
+
+					// CRITICAL FIX: Handle boolean results for checkbox attributes
+					if (result === true) {
+						return 'checked';
+					} else if (result === false) {
+						return '';
+					}
+
+					return result !== undefined ? result : '';
+				} catch (e) {
+					console.warn(`Failed to evaluate expression: ${expression}`, e);
+					return '';
+				}
 			});
 
 			html += itemHtml;
 		});
 
+		// Disconnect observer before DOM manipulation
+		if (this.observer) {
+			this.observer.disconnect();
+		}
+
 		container.innerHTML = html;
 
-		// After rendering, scan for any new bindings in the rendered content
-		setTimeout(() => {
-			this.scanBindings();
-		}, 0);
+		// Reconnect observer after DOM update
+		if (this.observer) {
+			this.observer.observe(document.body, {
+				childList: true,
+				subtree: true
+			});
+		}
 	}
 
 	processComponents() {
@@ -736,6 +851,11 @@ class Framework {
 
 			const customTags = document.querySelectorAll(name);
 
+			// Disconnect observer before DOM manipulations
+			if (this.observer) {
+				this.observer.disconnect();
+			}
+
 			customTags.forEach(el => {
 				const props = {};
 
@@ -754,8 +874,6 @@ class Framework {
 				el.replaceWith(...wrapper.childNodes);
 			});
 
-			await new Promise(resolve => setTimeout(resolve, 0));
-
 			// Clean up dead nodes
 			this.bindings.forEach((elements, key) => {
 				elements.forEach(el => {
@@ -773,11 +891,21 @@ class Framework {
 				});
 			});
 
+			// Rescan bindings for the new component content
 			this.scanBindings();
 
+			// Update all bindings with current data
 			this.bindings.forEach((elements, key) => {
 				this.updateBindings(key);
 			});
+
+			// Reconnect observer after all updates are complete
+			if (this.observer) {
+				this.observer.observe(document.body, {
+					childList: true,
+					subtree: true
+				});
+			}
 
 		} catch (error) {
 			console.error(`Failed to load component "${name}" from ${url}:`, error);
@@ -785,7 +913,7 @@ class Framework {
 	}
 }
 
-const app = new Framework();
+const app = new Yf();
 app.init();
 
 window.setState = (container, state) => app.setState(container, state);

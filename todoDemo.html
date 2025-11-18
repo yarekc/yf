@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Minimal Todo</title>
+	<script src="framework.js"></script>
+	<style>
+		body { max-width: 600px; margin: 50px auto; font-family: Arial; }
+		.todo { padding: 10px; margin: 5px 0; background: #f0f0f0; }
+		.done { text-decoration: line-through; opacity: 0.6; }
+	</style>
+</head>
+<body data-cloak>
+<h1>Todo List</h1>
+
+<p>{todos.length} tasks ({completedCount} done, {pendingCount} pending)</p>
+
+<input type="text" data-bind="newTodo" placeholder="New task...">
+<button onclick="add()">Add</button>
+
+<div data-for="todos as todo">
+	<div class="todo">
+		<input type="checkbox" onclick="toggle({todo.id}, this.checked)">
+		<span class="{todo.done ? 'done' : ''}">{todo.text}</span>
+		<button onclick="del({todo.id})" style="float:right">X</button>
+	</div>
+</div>
+
+<p show="{todos.length==0}">No tasks yet!</p>
+
+<script>
+	setData('newTodo', '');
+	setData('completedCount', 0);
+	setData('pendingCount', 0);
+	setData('todos', [
+		{ id: 1, text: 'Learn framework', done: false },
+		{ id: 2, text: 'Build app', done: false }
+	]);
+
+	let id = 3;
+
+	function stats() {
+		const t = getData('todos') || [];
+		setData('completedCount', t.filter(x => x.done).length);
+		setData('pendingCount', t.filter(x => !x.done).length);
+	}
+
+	function add() {
+		const text = getData('newTodo');
+		if (!text.trim()) return;
+		setData('todos', [...getData('todos'), { id: id++, text, done: false }]);
+		setData('newTodo', '');
+		stats();
+	}
+
+	function toggle(todoId, checked) {
+		const t = getData('todos');
+		const todo = t.find(x => x.id === todoId);
+		if (todo) {
+			todo.done = checked;
+			setData('todos', [...t]);
+			stats();
+		}
+	}
+
+	function del(todoId) {
+		setData('todos', getData('todos').filter(x => x.id !== todoId));
+		stats();
+	}
+
+	stats();
+</script>
+</body>
+</html>
