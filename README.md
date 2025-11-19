@@ -15,7 +15,7 @@ YF Framework brings the power of reactive data binding, components, and routing 
 - 🎯 **Reactive Data Binding** - Two-way binding with automatic UI updates
 - ☑️ **Full Form Support** - Text inputs, checkboxes, radio buttons, selects, textareas - all work automatically
 - 🎭 **Ternary Operators** - Full JavaScript expressions including conditional logic
-- 🧩 **Component System** - Reusable UI components with props
+- 🧩 **Component System** - Reusable UI components with props and data binding
 - 🔄 **Smart Iterators** - Loop through arrays with reactive updates
 - 👁️ **Conditional Rendering** - Show/hide elements with expressions
 - 🗺️ **Built-in Routing** - Client-side navigation out of the box
@@ -26,7 +26,6 @@ YF Framework brings the power of reactive data binding, components, and routing 
 - 🔄 **Progressive** - Works with existing code, no refactoring needed
 
 ## Quick Start
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +51,6 @@ That's it! Type in the input and watch the heading update automatically.
 
 ### ✅ Automatic Checkbox Support
 Checkboxes now work automatically with `data-bind` - no manual syncing needed!
-
 ```html
 <input type="checkbox" data-bind="subscribe">
 <p>{subscribe ? '✓ Subscribed' : '✗ Not subscribed'}</p>
@@ -64,11 +62,25 @@ Checkboxes now work automatically with `data-bind` - no manual syncing needed!
 
 ### ✅ Full Ternary Operator Support
 Use conditional logic directly in templates:
-
 ```html
 <div>{score >= 50 ? 'Pass' : 'Fail'}</div>
 <div>{isLoggedIn ? 'Welcome back!' : 'Please login'}</div>
 <div>{items.length > 0 ? items.length + ' items' : 'Empty cart'}</div>
+```
+
+### ✅ Component System
+Build reusable UI components with internal templates or external files:
+```html
+<!-- Define component -->
+<template component="user-card">
+    <div class="card">
+        <h3>{name}</h3>
+        <p>{email}</p>
+    </div>
+</template>
+
+<!-- Use component -->
+<user-card data-name="username" data-email="userEmail"></user-card>
 ```
 
 ## Core Features
@@ -76,7 +88,6 @@ Use conditional logic directly in templates:
 ### 📊 Data Binding
 
 #### All Form Elements Supported
-
 ```html
 <!-- Text inputs -->
 <input type="text" data-bind="username">
@@ -103,7 +114,6 @@ Use conditional logic directly in templates:
 #### Expression Evaluation
 
 Full JavaScript expressions supported:
-
 ```html
 <!-- String methods -->
 <div>{username.toUpperCase()}</div>
@@ -130,8 +140,102 @@ Full JavaScript expressions supported:
 <div>{username ? username.toUpperCase() : 'Guest'}</div>
 ```
 
-### 🔄 Iterators
+### 🧩 Components
 
+Build reusable components with props and reactive data binding.
+
+#### Internal Components (Template-based)
+
+Define components directly in your HTML using `<template>` tags:
+```html
+<!-- Define the component -->
+<template component="user-profile">
+    <div class="profile-card">
+        <h3>{name}</h3>
+        <p>{title}</p>
+        <p>📧 {email}</p>
+    </div>
+</template>
+
+<!-- Use the component with data binding -->
+<user-profile 
+    data-name="userName"
+    data-title="userTitle"
+    data-email="userEmail">
+</user-profile>
+
+<script>
+    setData('userName', 'John Doe');
+    setData('userTitle', 'Senior Developer');
+    setData('userEmail', 'john@example.com');
+</script>
+```
+
+#### External Components (File-based)
+
+Load components from external HTML files for better organization:
+
+**components/alert-box.html:**
+```html
+<div class="alert-box {type}">
+    <strong>{type == 'success' ? '✅' : type == 'warning' ? '⚠️' : '❌'}</strong>
+    <span>{message}</span>
+</div>
+```
+
+**index.html:**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="yf.js"></script>
+</head>
+<body data-cloak>
+    <!-- Component placeholder -->
+    <alert-box 
+        data-type="alertType"
+        data-message="alertMessage">
+    </alert-box>
+
+    <script>
+        // Set component data
+        setData('alertType', 'success');
+        setData('alertMessage', 'Operation completed!');
+        
+        // Load the component from file
+        loadComponent('alert-box', 'components/alert-box.html');
+    </script>
+</body>
+</html>
+```
+
+#### Component Props
+
+Components support both static and dynamic props:
+```html
+<!-- Static props -->
+<user-card name="John Doe" email="john@example.com"></user-card>
+
+<!-- Data-bound props (reactive) -->
+<user-card data-name="currentUser" data-email="currentEmail"></user-card>
+
+<!-- Mixed props -->
+<user-card 
+    title="Welcome"
+    data-name="userName"
+    class="highlight">
+</user-card>
+```
+
+**Key Features:**
+- 📦 **Encapsulation** - Keep UI logic organized and reusable
+- 🔄 **Reactive** - Components update automatically when data changes
+- 🎯 **Props** - Pass static values or bind to reactive data
+- 📁 **External Files** - Load components from separate files
+- 🎨 **Flexible** - Use inline templates or external files
+- ⚡ **Dynamic Loading** - Load components on-demand
+
+### 🔄 Iterators
 ```html
 <div data-for="users as user">
     <div class="user-card">
@@ -150,7 +254,6 @@ Full JavaScript expressions supported:
 ```
 
 ### 👁️ Conditional Rendering
-
 ```html
 <!-- Simple -->
 <div show="{isLoggedIn}">Welcome back!</div>
@@ -166,7 +269,6 @@ Full JavaScript expressions supported:
 ```
 
 ### 🗺️ Routing
-
 ```html
 <div id="app">
     <div state="home">Home Page</div>
@@ -177,70 +279,60 @@ Full JavaScript expressions supported:
 <button onclick="setState('app', 'about')">About</button>
 ```
 
-## Complete Example: Todo App
-
+## Complete Example: Dashboard with Components
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Todo App</title>
+    <title>Dashboard</title>
     <script src="yf.js"></script>
     <style>
-        body { max-width: 600px; margin: 50px auto; font-family: Arial; }
-        .todo { padding: 10px; margin: 5px 0; background: #f0f0f0; }
-        .done { text-decoration: line-through; opacity: 0.6; }
+        body { font-family: Arial; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .stat-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                     color: white; padding: 20px; border-radius: 10px; margin: 10px 0; }
+        .user-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+        .user-card { background: #f5f5f5; padding: 15px; border-radius: 8px; }
     </style>
 </head>
 <body data-cloak>
-    <h1>Todo List</h1>
-    
-    <p>{todos.length} tasks - {completedCount} done, {pendingCount} pending</p>
-    
-    <input type="text" data-bind="newTodo" placeholder="New task...">
-    <button onclick="add()">Add</button>
-    
-    <div data-for="todos as todo">
-        <div class="todo">
-            <input type="checkbox" data-bind="todo.done">
-            <span class="{todo.done ? 'done' : ''}">{todo.text}</span>
-            <button onclick="del({todo.id})">Delete</button>
+    <h1>Dashboard</h1>
+
+    <!-- Statistics Component -->
+    <template component="stat-card">
+        <div class="stat-card">
+            <h2>{value}</h2>
+            <p>{label}</p>
+        </div>
+    </template>
+
+    <stat-card data-value="users.length" label="Total Users"></stat-card>
+    <stat-card data-value="activeCount" label="Active Users"></stat-card>
+
+    <!-- User List with Iterator -->
+    <h2>Users</h2>
+    <div class="user-list" data-for="users as user">
+        <div class="user-card">
+            <h3>{user.name}</h3>
+            <p>📧 {user.email}</p>
+            <p>{user.active ? '🟢 Active' : '⚫ Inactive'}</p>
         </div>
     </div>
-    
-    <p show="{todos.length==0}">No tasks yet!</p>
-    
+
     <script>
-        setData('newTodo', '');
-        setData('completedCount', 0);
-        setData('pendingCount', 0);
-        setData('todos', [
-            { id: 1, text: 'Learn YF Framework', done: false },
-            { id: 2, text: 'Build something cool', done: false }
+        setData('users', [
+            { id: 1, name: 'Alice Johnson', email: 'alice@example.com', active: true },
+            { id: 2, name: 'Bob Smith', email: 'bob@example.com', active: true },
+            { id: 3, name: 'Charlie Brown', email: 'charlie@example.com', active: false }
         ]);
 
-        let id = 3;
-
-        function stats() {
-            const t = getData('todos') || [];
-            setData('completedCount', t.filter(x => x.done).length);
-            setData('pendingCount', t.filter(x => !x.done).length);
+        // Calculate active users
+        function updateStats() {
+            const users = getData('users') || [];
+            setData('activeCount', users.filter(u => u.active).length);
         }
 
-        function add() {
-            const text = getData('newTodo');
-            if (!text.trim()) return;
-            setData('todos', [...getData('todos'), { id: id++, text, done: false }]);
-            setData('newTodo', '');
-            stats();
-        }
-
-        function del(todoId) {
-            setData('todos', getData('todos').filter(x => x.id !== todoId));
-            stats();
-        }
-
-        stats();
+        updateStats();
     </script>
 </body>
 </html>
@@ -254,8 +346,9 @@ Full JavaScript expressions supported:
 - `getData(key)` - Get data
 - `setState(container, state)` - Change state
 - `getState(container)` - Get current state
-- `loadComponent(name, url)` - Load external component
-- `registerComponent(name, template)` - Register component
+- `registerComponent(name, template)` - Register component manually
+- `loadComponent(name, url)` - Load component from external file
+- `renderComponents()` - Re-render all components (called automatically)
 
 ### HTML Attributes
 
@@ -264,6 +357,8 @@ Full JavaScript expressions supported:
 - `show="{condition}"` - Conditional rendering
 - `data-for="array as item"` - Loop over arrays
 - `state="name"` - Define a state
+- `component="name"` - Define a component template
+- `data-xxx="key"` - Bind component prop to data
 - `data-cloak` - Hide until ready
 
 ## Browser Support

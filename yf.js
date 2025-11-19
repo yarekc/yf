@@ -653,6 +653,14 @@ class Yf {
 		});
 
 		this.processComponents();
+
+		// CRITICAL: Rescan bindings after components are processed
+		this.scanBindings();
+
+		// Force update all bindings
+		this.bindings.forEach((elements, key) => {
+			this.updateBindings(key);
+		});
 	}
 
 	processIterators() {
@@ -768,6 +776,85 @@ class Yf {
 		}
 	}
 
+	renderComponent(template, props) {
+		let rendered = template;
+
+		// Replace all {xxx} with prop values or keep as binding
+		rendered = rendered.replace(/\{([^}]+)\}/g, (match, expression) => {
+			expression = expression.trim();
+
+			// Check if it's a simple variable name (like "type" or "message")
+			if (/^[\w.]+$/.test(expression)) {
+				const propValue = props[expression];
+
+				if (propValue === undefined) {
+					return match; // Keep original
+				}
+
+				// If the prop value is itself a binding like {myType}
+				if (typeof propValue === 'string' && /^\{.+\}$/.test(propValue)) {
+					return propValue; // Return the binding as-is
+				}
+
+				// Static value - return it directly (no braces)
+				return propValue;
+			}
+
+			// It's a complex expression (ternary, function call, etc.)
+			let processedExpression = expression;
+			let hasAnyBinding = false;
+
+			// Find words that could be prop names
+			const words = expression.match(/\b[a-zA-Z_]\w*/g) || [];
+
+			words.forEach(word => {
+				// Skip JavaScript keywords
+				if (['true', 'false', 'null', 'undefined', 'return', 'if', 'else'].includes(word)) {
+					return;
+				}
+
+				const propValue = props[word];
+
+				if (propValue !== undefined) {
+					// If it's a binding like {myType}, extract just the variable name
+					if (typeof propValue === 'string' && /^\{(.+)\}$/.test(propValue)) {
+						const varName = propValue.slice(1, -1);
+						processedExpression = processedExpression.replace(
+							new RegExp(`\\b${word}\\b`, 'g'),
+							varName
+						);
+						hasAnyBinding = true;
+					} else {
+						// Static value - replace with the value in quotes
+						const replacement = typeof propValue === 'string'
+							? `'${propValue}'`
+							: propValue;
+						processedExpression = processedExpression.replace(
+							new RegExp(`\\b${word}\\b`, 'g'),
+							replacement
+						);
+					}
+				}
+			});
+
+			// If there are bindings, keep the expression for later evaluation
+			if (hasAnyBinding) {
+				return '{' + processedExpression + '}';
+			}
+
+			// All static - evaluate immediately
+			try {
+				const result = new Function('return ' + processedExpression)();
+				return result;
+			} catch (e) {
+				console.warn('Failed to evaluate static expression:', processedExpression, e);
+				return match;
+			}
+		});
+
+		return rendered;
+	}
+
 	processComponents() {
 		const componentElements = document.querySelectorAll('[component]:not(template)');
 
@@ -807,39 +894,6 @@ class Yf {
 				el.replaceWith(...wrapper.childNodes);
 			});
 		});
-	}
-
-	renderComponent(template, props) {
-		let rendered = template;
-
-		// First pass: replace {prop:xxx} syntax
-		rendered = rendered.replace(/\{prop:([\w.]+)\}/g, (match, propName) => {
-			return props[propName] || '';
-		});
-
-		// Second pass: handle {xxx} placeholders
-		rendered = rendered.replace(/\{([\w.]+)\}/g, (match, propName) => {
-			// Check if there's a data-xxx attribute that specifies a binding
-			const dataBindProp = props['data-' + propName];
-			if (dataBindProp !== undefined) {
-				// Return the binding syntax with the data key
-				return '{' + dataBindProp + '}';
-			}
-
-			const propValue = props[propName];
-
-			if (propValue === undefined) {
-				return match;
-			}
-
-			if (typeof propValue === 'string' && propValue.includes('{') && propValue.includes('}')) {
-				return propValue;
-			}
-
-			return propValue;
-		});
-
-		return rendered;
 	}
 
 	async loadComponentFromFile(name, url) {

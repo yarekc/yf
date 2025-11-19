@@ -54,6 +54,125 @@
 			border-radius: 10px;
 			margin-bottom: 10px;
 		}
+
+		/* Improved Code Preview Styles */
+		.code-preview {
+			background: #1e293b;
+			border-radius: 8px;
+			overflow: hidden;
+			margin-top: 20px;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+		}
+
+		.code-preview-header {
+			background: #0f172a;
+			padding: 10px 15px;
+			border-bottom: 1px solid #334155;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.code-preview-header span {
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			display: inline-block;
+		}
+
+		.code-preview-header .dot-red { background: #ef4444; }
+		.code-preview-header .dot-yellow { background: #eab308; }
+		.code-preview-header .dot-green { background: #22c55e; }
+
+		.code-preview-title {
+			color: #94a3b8;
+			font-size: 12px;
+			margin-left: auto;
+			font-family: 'Courier New', monospace;
+		}
+
+		.code-preview-body {
+			padding: 20px;
+			overflow-x: auto;
+		}
+
+		.code-preview pre {
+			margin: 0;
+			color: #e2e8f0;
+			font-family: 'Courier New', monospace;
+			font-size: 14px;
+			line-height: 1.8;
+			white-space: pre;
+		}
+
+		/* Component demo styles */
+		.profile-card {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			padding: 25px;
+			border-radius: 15px;
+			text-align: center;
+			box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+		}
+
+		.profile-card h3 {
+			margin: 0 0 10px 0;
+			font-size: 24px;
+		}
+
+		.profile-card p {
+			margin: 5px 0;
+			opacity: 0.9;
+		}
+
+		.alert-box {
+			padding: 15px 20px;
+			border-radius: 8px;
+			margin-bottom: 15px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.alert-box.success {
+			background: #d1fae5;
+			color: #065f46;
+			border-left: 4px solid #10b981;
+		}
+
+		.alert-box.warning {
+			background: #fef3c7;
+			color: #92400e;
+			border-left: 4px solid #f59e0b;
+		}
+
+		.alert-box.error {
+			background: #fee2e2;
+			color: #991b1b;
+			border-left: 4px solid #ef4444;
+		}
+
+		.stat-card {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			padding: 25px;
+			border-radius: 12px;
+			text-align: center;
+			margin-bottom: 15px;
+			box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+		}
+
+		.stat-card h2 {
+			margin: 0;
+			font-size: 48px;
+			font-weight: bold;
+		}
+
+		.stat-card p {
+			margin: 10px 0 0 0;
+			font-size: 18px;
+			opacity: 0.9;
+		}
 	</style>
 </head>
 <body data-cloak class="bg-light">
@@ -64,55 +183,52 @@
 		<p class="mb-0">Explore all features with live, interactive examples</p>
 	</div>
 </div>
+
 <div class="container pb-5">
 	<!-- Tab Navigation -->
 	<ul class="nav nav-tabs mb-4" id="demoTabs" role="tablist">
 		<li class="nav-item" role="presentation">
 			<button class="nav-link active" id="tab1" data-bs-toggle="tab" data-bs-target="#section1" type="button">
-				1. Data Binding
+				1. Data & Forms
 			</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="tab2" data-bs-toggle="tab" data-bs-target="#section2" type="button">
-				2. Checkboxes
+				2. Ternary
 			</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="tab3" data-bs-toggle="tab" data-bs-target="#section3" type="button">
-				3. Ternary
+				3. Iterators
 			</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="tab4" data-bs-toggle="tab" data-bs-target="#section4" type="button">
-				4. Iterators
+				4. Show/Hide
 			</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="tab5" data-bs-toggle="tab" data-bs-target="#section5" type="button">
-				5. Show/Hide
+				5. Routing
 			</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="tab6" data-bs-toggle="tab" data-bs-target="#section6" type="button">
-				6. Todo List
+				6. Components
 			</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="tab7" data-bs-toggle="tab" data-bs-target="#section7" type="button">
-				7. Forms
-			</button>
-		</li>
-		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="tab8" data-bs-toggle="tab" data-bs-target="#section8" type="button">
-				8. Routing
+				7. Todo List
 			</button>
 		</li>
 	</ul>
 
 	<!-- Tab Content -->
 	<div class="tab-content" id="demoTabContent">
-		<!-- Tab 1: Basic Data Binding -->
+		<!-- Tab 1: Data Binding + Checkboxes + Forms -->
 		<div class="tab-pane fade show active" id="section1" role="tabpanel">
+			<!-- 1A. Basic Data Binding -->
 			<div class="demo-section">
 				<span class="feature-tag">Two-Way Binding</span>
 				<h2>1. Basic Data Binding</h2>
@@ -135,11 +251,30 @@
 					<p class="mb-1"><strong>Email:</strong> {email}</p>
 					<p class="mb-0"><strong>Uppercase Name:</strong> {username.toUpperCase()}</p>
 				</div>
-			</div>
-		</div>
 
-		<!-- Tab 2: Checkboxes -->
-		<div class="tab-pane fade" id="section2" role="tabpanel">
+				<div class="code-preview" data-no-parse>
+					<div class="code-preview-header">
+						<span class="dot-red"></span>
+						<span class="dot-yellow"></span>
+						<span class="dot-green"></span>
+						<span class="code-preview-title">binding.html</span>
+					</div>
+					<div class="code-preview-body">
+                  <pre>&lt;!-- HTML Template --&gt;
+&lt;input type="text" data-bind="username"&gt;
+
+&lt;p&gt;{username}&lt;/p&gt;
+&lt;p&gt;{username.toUpperCase()}&lt;/p&gt;
+
+// JavaScript
+&lt;script&gt;
+  setData('username', 'John Doe');
+&lt;/script&gt;</pre>
+					</div>
+				</div>
+			</div>
+
+			<!-- 1B. Checkboxes -->
 			<div class="demo-section">
 				<span class="feature-tag">Checkboxes</span>
 				<h2>2. Automatic Checkbox Support</h2>
@@ -164,127 +299,29 @@
 					<p class="mb-1"><strong>Dark Mode:</strong> {darkMode ? '🌙 On' : '☀️ Off'}</p>
 					<p class="mb-0"><strong>Newsletter:</strong> {subscribe ? '✓ Subscribed' : '✗ Not subscribed'}</p>
 				</div>
-			</div>
-		</div>
 
-		<!-- Tab 3: Ternary Operators -->
-		<div class="tab-pane fade" id="section3" role="tabpanel">
-			<div class="demo-section">
-				<span class="feature-tag">Ternary Operators</span>
-				<h2>3. Conditional Logic with Ternary Operators</h2>
-				<p class="text-muted">Use full JavaScript conditional expressions in templates</p>
-
-				<div class="row">
-					<div class="col-md-4">
-						<label class="form-label">Age:</label>
-						<input type="number" class="form-control" data-bind="age" placeholder="Enter age">
+				<div class="code-preview" data-no-parse>
+					<div class="code-preview-header">
+						<span class="dot-red"></span>
+						<span class="dot-yellow"></span>
+						<span class="dot-green"></span>
+						<span class="code-preview-title">checkbox.html</span>
 					</div>
-					<div class="col-md-4">
-						<label class="form-label">Score:</label>
-						<input type="number" class="form-control" data-bind="score" placeholder="Enter score">
-					</div>
-					<div class="col-md-4">
-						<label class="form-label">Price:</label>
-						<input type="number" class="form-control" data-bind="price" placeholder="Enter price">
-					</div>
-				</div>
+					<div class="code-preview-body">
+                  <pre>&lt;!-- Checkbox binding --&gt;
+&lt;input type="checkbox" data-bind="notifications"&gt;
 
-				<div class="output-box">
-					<h4>Conditional Results:</h4>
-					<p class="mb-1"><strong>Age Category:</strong> {age >= 18 ? 'Adult 🧑' : age >= 13 ? 'Teen 👦' : 'Child 👶'}</p>
-					<p class="mb-1"><strong>Test Result:</strong> {score >= 50 ? '✅ Pass' : '❌ Fail'}</p>
-					<p class="mb-1"><strong>Grade:</strong> {score >= 90 ? 'A' : score >= 80 ? 'B' : score >= 70 ? 'C' : score >= 60 ? 'D' : 'F'}</p>
-					<p class="mb-0"><strong>Price:</strong> {price > 100 ? '💰 Premium ($' + price + ')' : '💵 Budget ($' + price + ')'}</p>
-				</div>
-			</div>
-		</div>
-
-		<!-- Tab 4: Iterators -->
-		<div class="tab-pane fade" id="section4" role="tabpanel">
-			<div class="demo-section">
-				<span class="feature-tag">Iterators</span>
-				<h2>4. Loop Through Data with Iterators</h2>
-				<p class="text-muted">Display lists of data automatically</p>
-
-				<div class="alert alert-info">
-					<strong>{users.length}</strong> users found
-				</div>
-
-				<div data-for="users as user">
-					<div class="user-card">
-						<h4>{user.name.toUpperCase()}</h4>
-						<p class="mb-1">📧 {user.email.toLowerCase()}</p>
-						<p class="mb-1">💼 Role: {user.role}</p>
-						<p class="mb-0">Status: {user.active ? '🟢 Active' : '⚫ Inactive'}</p>
+&lt;p&gt;
+  {notifications ? '✅ Enabled' : '❌ Disabled'}
+&lt;/p&gt;</pre>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<!-- Tab 5: Conditional Rendering -->
-		<div class="tab-pane fade" id="section5" role="tabpanel">
-			<div class="demo-section">
-				<span class="feature-tag">Show/Hide</span>
-				<h2>5. Conditional Rendering</h2>
-				<p class="text-muted">Show or hide elements based on conditions</p>
-
-				<div class="form-check form-switch mb-3">
-					<input class="form-check-input" type="checkbox" id="isLoggedIn" data-bind="isLoggedIn">
-					<label class="form-check-label" for="isLoggedIn">Simulate Login</label>
-				</div>
-
-				<div show="{isLoggedIn}" class="alert alert-success">
-					✅ Welcome back! You are logged in.
-				</div>
-
-				<div show="{!isLoggedIn}" class="alert alert-warning">
-					⚠️ Please log in to continue.
-				</div>
-
-				<div show="{users.length>2}" class="alert alert-info">
-					📊 You have multiple users ({users.length})
-				</div>
-			</div>
-		</div>
-
-		<!-- Tab 6: Todo List -->
-		<div class="tab-pane fade" id="section6" role="tabpanel">
-			<div class="demo-section">
-				<span class="feature-tag">Complete Example</span>
-				<h2>6. Interactive Todo List</h2>
-				<p class="text-muted">A complete application showing multiple features working together</p>
-
-				<div class="mb-3">
-					<div class="input-group">
-						<input type="text" class="form-control" data-bind="newTodo" placeholder="What needs to be done?" onkeypress="if(event.key==='Enter') addTodo()">
-						<button class="btn btn-primary" onclick="addTodo()">➕ Add Task</button>
-					</div>
-				</div>
-
-				<div class="alert alert-light">
-					<strong>{todos.length}</strong> total | <strong>{todoCompleted}</strong> done | <strong>{todoPending}</strong> pending
-				</div>
-
-				<div data-for="todos as todo">
-					<div class="todo-item">
-						<input type="checkbox" class="form-check-input" onclick="toggleTodo({todo.id}, this.checked)">
-						<span class="todo-text {todo.done ? 'done' : ''}">{todo.text}</span>
-						<button class="btn btn-sm btn-danger" onclick="deleteTodo({todo.id})">Delete</button>
-					</div>
-				</div>
-
-				<div show="{todos.length==0}" class="text-center text-muted py-4">
-					<h5>No tasks yet!</h5>
-					<p>Add your first task above.</p>
-				</div>
-			</div>
-		</div>
-
-		<!-- Tab 7: Form Elements -->
-		<div class="tab-pane fade" id="section7" role="tabpanel">
+			<!-- 1C. Forms -->
 			<div class="demo-section">
 				<span class="feature-tag">All Form Types</span>
-				<h2>7. All Form Elements</h2>
+				<h2>3. All Form Elements</h2>
 				<p class="text-muted">Every form element type is supported</p>
 
 				<div class="row">
@@ -316,23 +353,198 @@
 					<p class="mb-1"><strong>Volume:</strong> {volume}% {volume > 50 ? '🔊' : '🔉'}</p>
 					<p class="mb-0"><strong>Message Length:</strong> {message.length} chars</p>
 				</div>
+
+				<div class="code-preview" data-no-parse>
+					<div class="code-preview-header">
+						<span class="dot-red"></span>
+						<span class="dot-yellow"></span>
+						<span class="dot-green"></span>
+						<span class="code-preview-title">forms.html</span>
+					</div>
+					<div class="code-preview-body">
+                  <pre>&lt;!-- Select dropdown --&gt;
+&lt;select data-bind="country"&gt;
+  &lt;option value="us"&gt;USA&lt;/option&gt;
+  &lt;option value="fr"&gt;France&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- Range slider --&gt;
+&lt;input type="range" data-bind="volume" min="0" max="100"&gt;</pre>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<!-- Tab 8: Routing -->
-		<div class="tab-pane fade" id="section8" role="tabpanel">
+		<!-- Tab 2: Ternary Operators -->
+		<div class="tab-pane fade" id="section2" role="tabpanel">
+			<div class="demo-section">
+				<span class="feature-tag">Ternary Operators</span>
+				<h2>2. Conditional Logic with Ternary Operators</h2>
+				<p class="text-muted">Use full JavaScript conditional expressions in templates</p>
+
+				<div class="row">
+					<div class="col-md-4">
+						<label class="form-label">Age:</label>
+						<input type="number" class="form-control" data-bind="age" placeholder="Enter age">
+					</div>
+					<div class="col-md-4">
+						<label class="form-label">Score:</label>
+						<input type="number" class="form-control" data-bind="score" placeholder="Enter score">
+					</div>
+					<div class="col-md-4">
+						<label class="form-label">Price:</label>
+						<input type="number" class="form-control" data-bind="price" placeholder="Enter price">
+					</div>
+				</div>
+
+				<div class="output-box">
+					<h4>Conditional Results:</h4>
+					<p class="mb-1"><strong>Age Category:</strong> {age >= 18 ? 'Adult 🧑' : age >= 13 ? 'Teen 👦' : 'Child 👶'}</p>
+					<p class="mb-1"><strong>Test Result:</strong> {score >= 50 ? '✅ Pass' : '❌ Fail'}</p>
+					<p class="mb-1"><strong>Grade:</strong> {score >= 90 ? 'A' : score >= 80 ? 'B' : score >= 70 ? 'C' : score >= 60 ? 'D' : 'F'}</p>
+					<p class="mb-0"><strong>Price:</strong> {price > 100 ? '💰 Premium ($' + price + ')' : '💵 Budget ($' + price + ')'}</p>
+				</div>
+
+				<div class="code-preview" data-no-parse>
+					<div class="code-preview-header">
+						<span class="dot-red"></span>
+						<span class="dot-yellow"></span>
+						<span class="dot-green"></span>
+						<span class="code-preview-title">ternary.html</span>
+					</div>
+					<div class="code-preview-body">
+                  <pre>&lt;!-- Simple Ternary --&gt;
+&lt;p&gt;{score &gt;= 50 ? '✅ Pass' : '❌ Fail'}&lt;/p&gt;
+
+&lt;!-- Nested Ternary --&gt;
+&lt;p&gt;{age &gt;= 18 ? 'Adult' : age &gt;= 13 ? 'Teen' : 'Child'}&lt;/p&gt;
+
+&lt;!-- Complex Expression --&gt;
+&lt;p&gt;{price &gt; 100 ? '💰 Premium ($' + price + ')' : '💵 Budget'}&lt;/p&gt;</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Tab 3: Iterators -->
+		<div class="tab-pane fade" id="section3" role="tabpanel">
+			<div class="demo-section">
+				<span class="feature-tag">Iterators</span>
+				<h2>3. Loop Through Data with Iterators</h2>
+				<p class="text-muted">Display lists of data automatically</p>
+
+				<div class="mb-3">
+					<div class="row g-2">
+						<div class="col-md-3">
+							<input type="text" class="form-control" data-bind="newUserName" placeholder="Name">
+						</div>
+						<div class="col-md-3">
+							<input type="email" class="form-control" data-bind="newUserEmail" placeholder="Email">
+						</div>
+						<div class="col-md-3">
+							<input type="text" class="form-control" data-bind="newUserRole" placeholder="Role">
+						</div>
+						<div class="col-md-3">
+							<button class="btn btn-primary w-100" onclick="addUser()">➕ Add User</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="alert alert-info">
+					<strong>{users.length}</strong> users found
+				</div>
+
+				<div data-for="users as user">
+					<div class="user-card">
+						<button class="btn btn-sm btn-danger float-end" onclick="deleteUser({user.id})">🗑️ Delete</button>
+						<h4>{user.name.toUpperCase()}</h4>
+						<p class="mb-1">📧 {user.email.toLowerCase()}</p>
+						<p class="mb-1">💼 Role: {user.role}</p>
+						<p class="mb-0">Status: {user.active ? '🟢 Active' : '⚫ Inactive'}</p>
+					</div>
+				</div>
+
+				<div class="code-preview" data-no-parse>
+					<div class="code-preview-header">
+						<span class="dot-red"></span>
+						<span class="dot-yellow"></span>
+						<span class="dot-green"></span>
+						<span class="code-preview-title">iterator.html</span>
+					</div>
+					<div class="code-preview-body">
+                  <pre>&lt;!-- Loop through array --&gt;
+&lt;div data-for="users as user"&gt;
+  &lt;div class="user-card"&gt;
+    &lt;h4&gt;{user.name.toUpperCase()}&lt;/h4&gt;
+    &lt;p&gt;{user.email.toLowerCase()}&lt;/p&gt;
+    &lt;p&gt;Role: {user.role}&lt;/p&gt;
+    &lt;p&gt;{user.active ? '🟢 Active' : '⚫ Inactive'}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Tab 4: Conditional Rendering -->
+		<div class="tab-pane fade" id="section4" role="tabpanel">
+			<div class="demo-section">
+				<span class="feature-tag">Show/Hide</span>
+				<h2>4. Conditional Rendering</h2>
+				<p class="text-muted">Show or hide elements based on conditions</p>
+
+				<div class="form-check form-switch mb-3">
+					<input class="form-check-input" type="checkbox" id="isLoggedIn" data-bind="isLoggedIn">
+					<label class="form-check-label" for="isLoggedIn">Simulate Login</label>
+				</div>
+
+				<div show="{isLoggedIn}" class="alert alert-success">
+					✅ Welcome back! You are logged in.
+				</div>
+
+				<div show="{!isLoggedIn}" class="alert alert-warning">
+					⚠️ Please log in to continue.
+				</div>
+
+				<div show="{users.length>2}" class="alert alert-info">
+					📊 You have multiple users ({users.length})
+				</div>
+
+				<div class="code-preview" data-no-parse>
+					<div class="code-preview-header">
+						<span class="dot-red"></span>
+						<span class="dot-yellow"></span>
+						<span class="dot-green"></span>
+						<span class="code-preview-title">conditional.html</span>
+					</div>
+					<div class="code-preview-body">
+                  <pre>&lt;!-- Show when condition is true --&gt;
+&lt;div show="{isLoggedIn}"&gt;Welcome back!&lt;/div&gt;
+
+&lt;!-- Show when condition is false --&gt;
+&lt;div show="{!isLoggedIn}"&gt;Please log in.&lt;/div&gt;
+
+&lt;!-- Show based on array length --&gt;
+&lt;div show="{users.length &gt; 2}"&gt;Multiple users found&lt;/div&gt;</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Tab 5: Routing -->
+		<div class="tab-pane fade" id="section5" role="tabpanel">
 			<div class="demo-section">
 				<span class="feature-tag">Routing</span>
-				<h2>8. Client-Side Routing</h2>
+				<h2>5. Client-Side Routing</h2>
 				<p class="text-muted">Build single-page applications</p>
 
 				<div class="btn-group mb-3">
-					<button class="btn btn-outline-primary" onclick="setState('demoApp', 'home')">Home</button>
-					<button class="btn btn-outline-primary" onclick="setState('demoApp', 'about')">About</button>
-					<button class="btn btn-outline-primary" onclick="setState('demoApp', 'contact')">Contact</button>
+					<button class="btn btn-outline-primary" onclick="setState('routingDemo', 'home')">Home</button>
+					<button class="btn btn-outline-primary" onclick="setState('routingDemo', 'about')">About</button>
+					<button class="btn btn-outline-primary" onclick="setState('routingDemo', 'contact')">Contact</button>
 				</div>
 
-				<div id="demoApp">
+				<div id="routingDemo">
 					<div state="home" class="alert alert-success">
 						<h4>🏠 Home</h4>
 						<p class="mb-0">Welcome to YF Framework!</p>
@@ -349,6 +561,276 @@
 					</div>
 				</div>
 
+				<div class="code-preview" data-no-parse>
+					<div class="code-preview-header">
+						<span class="dot-red"></span>
+						<span class="dot-yellow"></span>
+						<span class="dot-green"></span>
+						<span class="code-preview-title">routing.html</span>
+					</div>
+					<div class="code-preview-body">
+                  <pre>&lt;!-- Navigation buttons --&gt;
+&lt;button onclick="setState('app', 'home')"&gt;Home&lt;/button&gt;
+&lt;button onclick="setState('app', 'about')"&gt;About&lt;/button&gt;
+
+&lt;!-- Route container --&gt;
+&lt;div id="app"&gt;
+  &lt;div state="home"&gt;Home content&lt;/div&gt;
+  &lt;div state="about"&gt;About content&lt;/div&gt;
+&lt;/div&gt;</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Tab 6: Components -->
+		<div class="tab-pane fade" id="section6" role="tabpanel">
+			<!-- 6A. Static Props -->
+			<div class="demo-section">
+				<span class="feature-tag">Static Props</span>
+				<h2>6A. Components with Static Values</h2>
+				<p class="text-muted">Pass static values directly to components</p>
+
+				<div class="row g-3">
+					<div class="col-md-4">
+						<stat-card value="1,284" label="Total Users"></stat-card>
+					</div>
+					<div class="col-md-4">
+						<stat-card value="892" label="Active Today"></stat-card>
+					</div>
+					<div class="col-md-4">
+						<stat-card value="67%" label="Engagement"></stat-card>
+					</div>
+				</div>
+
+				<h3 class="mt-4">Alert Messages</h3>
+				<alert-box type="success" message="Operation completed successfully!"></alert-box>
+				<alert-box type="warning" message="Please review your settings."></alert-box>
+				<alert-box type="error" message="An error occurred. Please try again."></alert-box>
+
+				<div class="code-preview" data-no-parse>
+					<div class="code-preview-header">
+						<span class="dot-red"></span>
+						<span class="dot-yellow"></span>
+						<span class="dot-green"></span>
+						<span class="code-preview-title">static-components.html</span>
+					</div>
+					<div class="code-preview-body">
+                  <pre>&lt;!-- Define components --&gt;
+&lt;template component="stat-card"&gt;
+  &lt;div class="stat-card"&gt;
+    &lt;h2&gt;{value}&lt;/h2&gt;
+    &lt;p&gt;{label}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;template component="alert-box"&gt;
+  &lt;div class="alert-box {type}"&gt;
+    &lt;strong&gt;{type == 'success' ? '✅' : type == 'warning' ? '⚠️' : '❌'}&lt;/strong&gt;
+    &lt;span&gt;{message}&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;!-- Use with static values --&gt;
+&lt;stat-card value="1,284" label="Total Users"&gt;&lt;/stat-card&gt;
+&lt;alert-box type="success" message="Operation completed!"&gt;&lt;/alert-box&gt;</pre>
+					</div>
+				</div>
+			</div>
+
+			<!-- 6B. Dynamic Props -->
+			<div class="demo-section">
+				<span class="feature-tag">Dynamic Props</span>
+				<h2>6B. Components with Data Binding</h2>
+				<p class="text-muted">Bind component props to reactive data</p>
+
+				<div class="row g-3 mb-4">
+					<div class="col-md-4">
+						<label class="form-label">Name:</label>
+						<input type="text" class="form-control" data-bind="profileName" placeholder="Name">
+					</div>
+					<div class="col-md-4">
+						<label class="form-label">Title:</label>
+						<input type="text" class="form-control" data-bind="profileTitle" placeholder="Title">
+					</div>
+					<div class="col-md-4">
+						<label class="form-label">Email:</label>
+						<input type="email" class="form-control" data-bind="profileEmail" placeholder="Email">
+					</div>
+				</div>
+
+				<user-profile
+						name="{profileName}"
+						title="{profileTitle}"
+						email="{profileEmail}">
+				</user-profile>
+
+				<h3 class="mt-4">Dynamic Alert</h3>
+				<div class="row g-3 mb-3">
+					<div class="col-md-4">
+						<select class="form-select" data-bind="alertType">
+							<option value="success">Success</option>
+							<option value="warning">Warning</option>
+							<option value="error">Error</option>
+						</select>
+					</div>
+					<div class="col-md-8">
+						<input type="text" class="form-control" data-bind="alertMessage" placeholder="Alert message">
+					</div>
+				</div>
+
+				<alert-box type="{alertType}" message="{alertMessage}"></alert-box>
+
+				<div class="code-preview" data-no-parse>
+					<div class="code-preview-header">
+						<span class="dot-red"></span>
+						<span class="dot-yellow"></span>
+						<span class="dot-green"></span>
+						<span class="code-preview-title">dynamic-components.html</span>
+					</div>
+					<div class="code-preview-body">
+                  <pre>&lt;!-- Define component --&gt;
+&lt;template component="user-profile"&gt;
+  &lt;div class="profile-card"&gt;
+    &lt;h3&gt;{name}&lt;/h3&gt;
+    &lt;p&gt;{title}&lt;/p&gt;
+    &lt;p&gt;📧 {email}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;!-- Use with data binding --&gt;
+&lt;user-profile
+  name="{profileName}"
+  title="{profileTitle}"
+  email="{profileEmail}"&gt;
+&lt;/user-profile&gt;
+
+&lt;alert-box type="{alertType}" message="{alertMessage}"&gt;&lt;/alert-box&gt;
+
+// JavaScript
+&lt;script&gt;
+  setData('profileName', 'John Doe');
+  setData('alertType', 'success');
+  setData('alertMessage', 'Hello!');
+&lt;/script&gt;</pre>
+					</div>
+				</div>
+			</div>
+
+			<!-- 6C. Component Features -->
+			<div class="demo-section">
+				<span class="feature-tag">Features</span>
+				<h2>6C. Component System Features</h2>
+
+				<div class="alert alert-info">
+					<h5>💡 Key Features:</h5>
+					<ul class="mb-0">
+						<li><strong>Template-based:</strong> Define components using <code>&lt;template component="name"&gt;</code></li>
+						<li><strong>Static Props:</strong> Pass values directly like <code>type="success"</code></li>
+						<li><strong>Dynamic Props:</strong> Bind to data using <code>type="{dataKey}"</code> syntax</li>
+						<li><strong>Reactive:</strong> Components update automatically when bound data changes</li>
+						<li><strong>Expressions:</strong> Use ternary operators and methods inside components</li>
+						<li><strong>Reusable:</strong> Define once, use multiple times with different props</li>
+					</ul>
+				</div>
+
+				<div class="alert alert-success">
+					<h5>✅ Component Syntax:</h5>
+					<pre class="mb-0" style="background: white; padding: 15px; border-radius: 5px; color: #333;">
+&lt;!-- Define --&gt;
+&lt;template component="my-component"&gt;
+  &lt;div&gt;{prop1} and {prop2}&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;!-- Use with static values --&gt;
+&lt;my-component prop1="Hello" prop2="World"&gt;&lt;/my-component&gt;
+
+&lt;!-- Use with data binding --&gt;
+&lt;my-component prop1="{data1}" prop2="{data2}"&gt;&lt;/my-component&gt;</pre>
+				</div>
+			</div>
+		</div>
+
+		<!-- Tab 7: Todo List -->
+		<div class="tab-pane fade" id="section7" role="tabpanel">
+			<div class="demo-section">
+				<span class="feature-tag">Complete Example</span>
+				<h2>7. Interactive Todo List</h2>
+				<p class="text-muted">A complete application showing multiple features working together</p>
+
+				<div class="mb-3">
+					<div class="input-group">
+						<input type="text" class="form-control" data-bind="newTodo" placeholder="What needs to be done?" onkeypress="if(event.key==='Enter') addTodo()">
+						<button class="btn btn-primary" onclick="addTodo()">➕ Add Task</button>
+					</div>
+				</div>
+
+				<div class="alert alert-light">
+					<strong>{todos.length}</strong> total | <strong>{todoCompleted}</strong> done | <strong>{todoPending}</strong> pending
+				</div>
+
+				<div data-for="todos as todo">
+					<div class="todo-item">
+						<input type="checkbox" class="form-check-input" onclick="toggleTodo({todo.id}, this.checked)">
+						<span class="todo-text {todo.done ? 'done' : ''}">{todo.text}</span>
+						<button class="btn btn-sm btn-danger" onclick="deleteTodo({todo.id})">Delete</button>
+					</div>
+				</div>
+
+				<div show="{todos.length==0}" class="text-center text-muted py-4">
+					<h5>No tasks yet!</h5>
+					<p>Add your first task above.</p>
+				</div>
+
+				<div class="code-preview" data-no-parse>
+					<div class="code-preview-header">
+						<span class="dot-red"></span>
+						<span class="dot-yellow"></span>
+						<span class="dot-green"></span>
+						<span class="code-preview-title">todo-app.html</span>
+					</div>
+					<div class="code-preview-body">
+                  <pre>&lt;!-- Input for new todo --&gt;
+&lt;input type="text" data-bind="newTodo"&gt;
+&lt;button onclick="addTodo()"&gt;Add&lt;/button&gt;
+
+&lt;!-- Display statistics --&gt;
+&lt;p&gt;Total: {todos.length}&lt;/p&gt;
+
+&lt;!-- Loop through todos --&gt;
+&lt;div data-for="todos as todo"&gt;
+  &lt;input type="checkbox" onclick="toggleTodo({todo.id}, this.checked)"&gt;
+  &lt;span class="{todo.done ? 'done' : ''}"&gt;{todo.text}&lt;/span&gt;
+&lt;/div&gt;
+
+// JavaScript Functions
+&lt;script&gt;
+  let nextId = 1;
+
+  function addTodo() {
+    const text = getData('newTodo');
+    if (!text.trim()) return;
+
+    const todos = getData('todos');
+    setData('todos', [
+      ...todos,
+      { id: nextId++, text, done: false }
+    ]);
+    setData('newTodo', '');
+  }
+
+  function toggleTodo(id, checked) {
+    const todos = getData('todos');
+    const todo = todos.find(t =&gt; t.id === id);
+    if (todo) {
+      todo.done = checked;
+      setData('todos', [...todos]);
+    }
+  }
+&lt;/script&gt;</pre>
+					</div>
+				</div>
+
 				<div class="mt-4 p-4 bg-primary text-white rounded">
 					<h4>🎉 Congratulations!</h4>
 					<p class="mb-0">You've explored all YF Framework features. Check the README.md for documentation!</p>
@@ -357,6 +839,29 @@
 		</div>
 	</div>
 </div>
+
+<!-- Component Templates -->
+<template component="user-profile">
+	<div class="profile-card">
+		<h3>{name}</h3>
+		<p>{title}</p>
+		<p>📧 {email}</p>
+	</div>
+</template>
+
+<template component="alert-box">
+	<div class="alert-box {type}">
+		<strong>{type == 'success' ? '✅' : type == 'warning' ? '⚠️' : '❌'}</strong>
+		<span>{message}</span>
+	</div>
+</template>
+
+<template component="stat-card">
+	<div class="stat-card">
+		<h2>{value}</h2>
+		<p>{label}</p>
+	</div>
+</template>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -372,9 +877,9 @@
 	setData('price', 150);
 
 	setData('users', [
-		{ name: 'Alice', email: 'ALICE@EXAMPLE.COM', role: 'Admin', active: true },
-		{ name: 'Bob', email: 'BOB@EXAMPLE.COM', role: 'Developer', active: true },
-		{ name: 'Charlie', email: 'CHARLIE@EXAMPLE.COM', role: 'Designer', active: false }
+		{ id: 1, name: 'Alice', email: 'ALICE@EXAMPLE.COM', role: 'Admin', active: true },
+		{ id: 2, name: 'Bob', email: 'BOB@EXAMPLE.COM', role: 'Developer', active: true },
+		{ id: 3, name: 'Charlie', email: 'CHARLIE@EXAMPLE.COM', role: 'Designer', active: false }
 	]);
 
 	setData('isLoggedIn', true);
@@ -386,7 +891,19 @@
 		{ id: 2, text: 'Build something', done: false }
 	]);
 
+	setData('country', '');
+	setData('volume', 50);
+	setData('message', '');
+
+	// Component demo data
+	setData('profileName', 'Sarah Johnson');
+	setData('profileTitle', 'Senior Developer');
+	setData('profileEmail', 'sarah@example.com');
+	setData('alertType', 'success');
+	setData('alertMessage', 'System is running smoothly!');
+
 	let nextTodoId = 3;
+	let nextUserId = 4;
 
 	function updateTodoStats() {
 		const todos = getData('todos') || [];
@@ -422,11 +939,31 @@
 		updateTodoStats();
 	}
 
-	setData('country', 'us');
-	setData('volume', 70);
-	setData('message', 'Sample message here!');
+	function addUser() {
+		const name = getData('newUserName');
+		const email = getData('newUserEmail');
+		const role = getData('newUserRole');
+
+		if (!name.trim() || !email.trim() || !role.trim()) return;
+
+		const users = getData('users');
+		setData('users', [
+			...users,
+			{ id: nextUserId++, name, email, role, active: true }
+		]);
+
+		setData('newUserName', '');
+		setData('newUserEmail', '');
+		setData('newUserRole', '');
+	}
+
+	function deleteUser(id) {
+		setData('users', getData('users').filter(u => u.id !== id));
+	}
 
 	updateTodoStats();
+	setState('routingDemo', 'home');
 </script>
+
 </body>
 </html>
