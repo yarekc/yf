@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Buttons Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid #ddd;
+        }
+        .radio-option:hover {
+            border-color: #667eea;
+        }
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .output {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #667eea;
+        }
+        h1 { color: #667eea; }
+        label { cursor: pointer; }
+    </style>
+</head>
+<body data-cloak>
+    <h1>🔘 Simple Radio Buttons</h1>
+    <p>Select your preferred payment method.</p>
+
+    <div class="demo-box">
+        <strong style="display: block; margin-bottom: 15px;">Choose payment method:</strong>
+        
+        <div class="radio-group">
+            <div class="radio-option">
+                <input type="radio" id="card" name="payment" value="card" 
+                       onclick="setData('paymentMethod', 'card')">
+                <label for="card">💳 Credit/Debit Card</label>
+            </div>
+            
+            <div class="radio-option">
+                <input type="radio" id="paypal" name="payment" value="paypal" 
+                       onclick="setData('paymentMethod', 'paypal')">
+                <label for="paypal">🅿️ PayPal</label>
+            </div>
+            
+            <div class="radio-option">
+                <input type="radio" id="bank" name="payment" value="bank" 
+                       onclick="setData('paymentMethod', 'bank')">
+                <label for="bank">🏦 Bank Transfer</label>
+            </div>
+            
+            <div class="radio-option">
+                <input type="radio" id="cash" name="payment" value="cash" 
+                       onclick="setData('paymentMethod', 'cash')">
+                <label for="cash">💵 Cash on Delivery</label>
+            </div>
+        </div>
+
+        <div class="output">
+            <strong>Selected:</strong> 
+            {paymentMethod == 'card' ? '💳 Credit/Debit Card' : 
+             paymentMethod == 'paypal' ? '🅿️ PayPal' : 
+             paymentMethod == 'bank' ? '🏦 Bank Transfer' : 
+             paymentMethod == 'cash' ? '💵 Cash on Delivery' : 
+             '⚠️ Please select a payment method'}
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px; overflow-x: auto;">
+&lt;input type="radio" id="card" name="payment" 
+       onclick="setData('paymentMethod', 'card')"&gt;
+&lt;label for="card"&gt;💳 Credit Card&lt;/label&gt;
+
+&lt;input type="radio" id="paypal" name="payment" 
+       onclick="setData('paymentMethod', 'paypal')"&gt;
+&lt;label for="paypal"&gt;🅿️ PayPal&lt;/label&gt;
+
+&lt;div&gt;
+  Selected: 
+  {paymentMethod == 'card' ? '💳 Credit Card' : 
+   paymentMethod == 'paypal' ? '🅿️ PayPal' : 
+   '⚠️ Please select'}
+&lt;/div&gt;
+
+&lt;script&gt;
+  setData('paymentMethod', ''); // Initialize
+&lt;/script&gt;</pre>
+
+    <script>
+        setData('paymentMethod', '');
+    </script>
+</body>
+</html>

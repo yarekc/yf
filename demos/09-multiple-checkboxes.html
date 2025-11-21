@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Checkboxes Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .output {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #667eea;
+        }
+        h1 { color: #667eea; }
+        label { cursor: pointer; flex: 1; }
+        .selected-list {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body data-cloak>
+    <h1>☑️ Multiple Checkboxes</h1>
+    <p>Select your favorite programming languages.</p>
+
+    <div class="demo-box">
+        <strong style="display: block; margin-bottom: 15px;">Choose languages:</strong>
+        
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="js" data-bind="langJS">
+                <label for="js">JavaScript</label>
+            </div>
+            
+            <div class="checkbox-item">
+                <input type="checkbox" id="python" data-bind="langPython">
+                <label for="python">Python</label>
+            </div>
+            
+            <div class="checkbox-item">
+                <input type="checkbox" id="java" data-bind="langJava">
+                <label for="java">Java</label>
+            </div>
+            
+            <div class="checkbox-item">
+                <input type="checkbox" id="cpp" data-bind="langCpp">
+                <label for="cpp">C++</label>
+            </div>
+            
+            <div class="checkbox-item">
+                <input type="checkbox" id="go" data-bind="langGo">
+                <label for="go">Go</label>
+            </div>
+        </div>
+
+        <div class="output">
+            <strong>Selected languages:</strong>
+            
+            <div class="selected-list">
+                <div show="{langJS}">✅ JavaScript</div>
+                <div show="{langPython}">✅ Python</div>
+                <div show="{langJava}">✅ Java</div>
+                <div show="{langCpp}">✅ C++</div>
+                <div show="{langGo}">✅ Go</div>
+                <div show="{!langJS && !langPython && !langJava && !langCpp && !langGo}">
+                    ⚠️ No languages selected
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px; overflow-x: auto;">
+&lt;input type="checkbox" id="js" data-bind="langJS"&gt;
+&lt;label for="js"&gt;JavaScript&lt;/label&gt;
+
+&lt;input type="checkbox" id="python" data-bind="langPython"&gt;
+&lt;label for="python"&gt;Python&lt;/label&gt;
+
+&lt;!-- Show only when selected --&gt;
+&lt;div show="{langJS}"&gt;✅ JavaScript&lt;/div&gt;
+&lt;div show="{langPython}"&gt;✅ Python&lt;/div&gt;
+
+&lt;!-- Show when nothing selected --&gt;
+&lt;div show="{!langJS &amp;&amp; !langPython}"&gt;
+  ⚠️ No languages selected
+&lt;/div&gt;
+
+&lt;script&gt;
+  setData('langJS', false);
+  setData('langPython', false);
+&lt;/script&gt;</pre>
+
+    <script>
+        setData('langJS', false);
+        setData('langPython', false);
+        setData('langJava', false);
+        setData('langCpp', false);
+        setData('langGo', false);
+    </script>
+</body>
+</html>

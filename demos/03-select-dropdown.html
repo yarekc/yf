@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Dropdown Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+        }
+        .output {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #667eea;
+        }
+        h1 { color: #667eea; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+    </style>
+</head>
+<body data-cloak>
+    <h1>📋 Simple Select Dropdown</h1>
+    <p>Choose an option from the dropdown menu.</p>
+
+    <div class="demo-box">
+        <label>Choose your favorite color:</label>
+        <select data-bind="favoriteColor">
+            <option value="">-- Select a color --</option>
+            <option value="red">🔴 Red</option>
+            <option value="blue">🔵 Blue</option>
+            <option value="green">🟢 Green</option>
+            <option value="yellow">🟡 Yellow</option>
+            <option value="purple">🟣 Purple</option>
+        </select>
+
+        <div class="output">
+            <strong>You selected:</strong> {favoriteColor || 'Nothing yet'}
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px;">
+&lt;select data-bind="favoriteColor"&gt;
+  &lt;option value=""&gt;-- Select --&lt;/option&gt;
+  &lt;option value="red"&gt;Red&lt;/option&gt;
+  &lt;option value="blue"&gt;Blue&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;div&gt;
+  You selected: {favoriteColor || 'Nothing yet'}
+&lt;/div&gt;
+
+&lt;script&gt;
+  setData('favoriteColor', ''); // Initialize
+&lt;/script&gt;</pre>
+
+    <script>
+        setData('favoriteColor', '');
+    </script>
+</body>
+</html>

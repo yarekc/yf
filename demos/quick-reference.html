@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YF Framework - Quick Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #667eea;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #94a3b8;
+        }
+        .section {
+            background: #334155;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .example {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #475569;
+        }
+        .example:last-child {
+            margin-bottom: 0;
+        }
+        .label {
+            color: #f59e0b;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        code {
+            color: #10b981;
+            background: #0f172a;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .comment {
+            color: #64748b;
+        }
+        pre {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .tag {
+            color: #f472b6;
+        }
+        .attr {
+            color: #38bdf8;
+        }
+        .value {
+            color: #fbbf24;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #475569;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ YF Framework</h1>
+        <p class="subtitle">Quick Reference Guide</p>
+
+        <!-- Data Binding -->
+        <div class="section">
+            <h2>📊 Data Binding</h2>
+            <div class="grid">
+                <div class="example">
+                    <div class="label">Two-Way Binding</div>
+                    <pre><span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"text"</span> <span class="attr">data-bind</span>=<span class="value">"name"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;div&gt;</span>{name}<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Set Data</div>
+                    <pre><span class="comment">// JavaScript</span>
+setData('name', 'John');
+getData('name'); <span class="comment">// Returns 'John'</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Expressions</div>
+                    <pre><span class="tag">&lt;div&gt;</span>{name.toUpperCase()}<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;div&gt;</span>{age >= 18 ? 'Adult' : 'Minor'}<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Elements -->
+        <div class="section">
+            <h2>📝 Form Elements</h2>
+            <div class="grid">
+                <div class="example">
+                    <div class="label">Text Input</div>
+                    <pre><span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"text"</span> <span class="attr">data-bind</span>=<span class="value">"username"</span><span class="tag">&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Checkbox</div>
+                    <pre><span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"checkbox"</span> <span class="attr">data-bind</span>=<span class="value">"agree"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;div&gt;</span>{agree ? 'Yes' : 'No'}<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Select</div>
+                    <pre><span class="tag">&lt;select</span> <span class="attr">data-bind</span>=<span class="value">"country"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="value">"us"</span><span class="tag">&gt;</span>USA<span class="tag">&lt;/option&gt;</span>
+<span class="tag">&lt;/select&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Textarea</div>
+                    <pre><span class="tag">&lt;textarea</span> <span class="attr">data-bind</span>=<span class="value">"message"</span><span class="tag">&gt;&lt;/textarea&gt;</span>
+<span class="tag">&lt;div&gt;</span>{message.length} chars<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Range</div>
+                    <pre><span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"range"</span> <span class="attr">data-bind</span>=<span class="value">"volume"</span> 
+       <span class="attr">min</span>=<span class="value">"0"</span> <span class="attr">max</span>=<span class="value">"100"</span><span class="tag">&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Radio</div>
+                    <pre><span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"radio"</span> <span class="attr">name</span>=<span class="value">"choice"</span> 
+       <span class="attr">onclick</span>=<span class="value">"setData('opt', 'a')"</span><span class="tag">&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conditional Rendering -->
+        <div class="section">
+            <h2>👁️ Conditional Rendering</h2>
+            <div class="example">
+                <div class="label">Show/Hide</div>
+                <pre><span class="tag">&lt;div</span> <span class="attr">show</span>=<span class="value">"{isLoggedIn}"</span><span class="tag">&gt;</span>Welcome!<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">show</span>=<span class="value">"{!isLoggedIn}"</span><span class="tag">&gt;</span>Please login<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">show</span>=<span class="value">"{age >= 18}"</span><span class="tag">&gt;</span>Adult content<span class="tag">&lt;/div&gt;</span></pre>
+            </div>
+        </div>
+
+        <!-- Routing -->
+        <div class="section">
+            <h2>🗺️ Routing</h2>
+            <div class="grid">
+                <div class="example">
+                    <div class="label">Define Routes</div>
+                    <pre><span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="value">"app"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">state</span>=<span class="value">"home"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">state</span>=<span class="value">"about"</span><span class="tag">&gt;</span>About<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Navigate</div>
+                    <pre>setState('app', 'home');
+setState('app', 'about');
+getState('app'); <span class="comment">// Current state</span></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Components -->
+        <div class="section">
+            <h2>🧩 Components</h2>
+            <div class="grid">
+                <div class="example">
+                    <div class="label">Define Component</div>
+                    <pre><span class="tag">&lt;template</span> <span class="attr">component</span>=<span class="value">"user-card"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div&gt;</span>
+    <span class="tag">&lt;h3&gt;</span>{name}<span class="tag">&lt;/h3&gt;</span>
+    <span class="tag">&lt;p&gt;</span>{email}<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/template&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Use Component (Static)</div>
+                    <pre><span class="tag">&lt;user-card</span> 
+  <span class="attr">name</span>=<span class="value">"John"</span>
+  <span class="attr">email</span>=<span class="value">"john@example.com"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/user-card&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Use Component (Dynamic)</div>
+                    <pre><span class="tag">&lt;user-card</span> 
+  <span class="attr">data-name</span>=<span class="value">"userName"</span>
+  <span class="attr">data-email</span>=<span class="value">"userEmail"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/user-card&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Iterators -->
+        <div class="section">
+            <h2>🔄 Iterators</h2>
+            <div class="grid">
+                <div class="example">
+                    <div class="label">Loop Through Array</div>
+                    <pre><span class="tag">&lt;div</span> <span class="attr">data-for</span>=<span class="value">"users as user"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div&gt;</span>{user.name}<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div&gt;</span>{user.email}<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">With Methods</div>
+                    <pre><span class="tag">&lt;div</span> <span class="attr">data-for</span>=<span class="value">"items as item"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div&gt;</span>{item.name.toUpperCase()}<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div&gt;</span>{item.price.toFixed(2)}<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+
+                <div class="example">
+                    <div class="label">Set Array Data</div>
+                    <pre>setData('users', [
+  { name: 'Alice', email: 'a@ex.com' },
+  { name: 'Bob', email: 'b@ex.com' }
+]);</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Getting Started -->
+        <div class="section">
+            <h2>🚀 Getting Started</h2>
+            <div class="example">
+                <div class="label">HTML Setup</div>
+                <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="value">"yf.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body</span> <span class="attr">data-cloak</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h1&gt;</span>Hello {name}!<span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">data-bind</span>=<span class="value">"name"</span><span class="tag">&gt;</span>
+  
+  <span class="tag">&lt;script&gt;</span>
+    setData('name', 'World');
+  <span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                <a href="index.html">← Back to Demos</a> | 
+                <a href="README.md">Documentation</a> | 
+                <a href="demo.html">Full Demo</a>
+            </p>
+            <p style="margin-top: 15px;">
+                YF Framework - Simple, Reactive, Powerful
+            </p>
+        </div>
+    </div>
+</body>
+</html>

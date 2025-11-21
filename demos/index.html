@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YF Framework - Form Demos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+        }
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .card-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .card-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+        .footer a {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 YF Framework</h1>
+            <p>Simple Form Examples - Learn by Doing</p>
+        </div>
+
+        <div class="grid">
+            <a href="01-text-input.html" class="card">
+                <div class="card-icon">📝</div>
+                <div class="card-title">Text Input</div>
+                <div class="card-description">
+                    Learn the basics of data binding with a simple text input field.
+                </div>
+                <span class="badge">Beginner</span>
+            </a>
+
+            <a href="02-checkbox.html" class="card">
+                <div class="card-icon">☑️</div>
+                <div class="card-title">Checkbox</div>
+                <div class="card-description">
+                    See how checkboxes work with automatic boolean handling.
+                </div>
+                <span class="badge">Beginner</span>
+            </a>
+
+            <a href="03-select-dropdown.html" class="card">
+                <div class="card-icon">📋</div>
+                <div class="card-title">Select Dropdown</div>
+                <div class="card-description">
+                    Bind dropdown menus to your data with ease.
+                </div>
+                <span class="badge">Beginner</span>
+            </a>
+
+            <a href="04-textarea.html" class="card">
+                <div class="card-icon">📝</div>
+                <div class="card-title">Textarea</div>
+                <div class="card-description">
+                    Multi-line text input with live character counting.
+                </div>
+                <span class="badge">Beginner</span>
+            </a>
+
+            <a href="05-range-slider.html" class="card">
+                <div class="card-icon">🎚️</div>
+                <div class="card-title">Range Slider</div>
+                <div class="card-description">
+                    Interactive slider with real-time value updates and conditional display.
+                </div>
+                <span class="badge">Beginner</span>
+            </a>
+
+            <a href="06-number-input.html" class="card">
+                <div class="card-icon">🔢</div>
+                <div class="card-title">Number Input</div>
+                <div class="card-description">
+                    Numeric input with validation and conditional logic.
+                </div>
+                <span class="badge">Beginner</span>
+            </a>
+
+            <a href="07-radio-buttons.html" class="card">
+                <div class="card-icon">🔘</div>
+                <div class="card-title">Radio Buttons</div>
+                <div class="card-description">
+                    Single-choice selection with radio button groups.
+                </div>
+                <span class="badge">Intermediate</span>
+            </a>
+
+            <a href="08-email-input.html" class="card">
+                <div class="card-icon">📧</div>
+                <div class="card-title">Email Input</div>
+                <div class="card-description">
+                    Email validation with real-time feedback.
+                </div>
+                <span class="badge">Intermediate</span>
+            </a>
+
+            <a href="09-multiple-checkboxes.html" class="card">
+                <div class="card-icon">☑️</div>
+                <div class="card-title">Multiple Checkboxes</div>
+                <div class="card-description">
+                    Handle multiple checkbox selections with conditional rendering.
+                </div>
+                <span class="badge">Intermediate</span>
+            </a>
+
+            <a href="10-complete-form.html" class="card">
+                <div class="card-icon">📋</div>
+                <div class="card-title">Complete Form</div>
+                <div class="card-description">
+                    All form elements combined in a full contact form example.
+                </div>
+                <span class="badge">Advanced</span>
+            </a>
+
+            <a href="11-simple-routing.html" class="card">
+                <div class="card-icon">🗺️</div>
+                <div class="card-title">Simple Routing</div>
+                <div class="card-description">
+                    Navigate between pages using setState for client-side routing.
+                </div>
+                <span class="badge">Beginner</span>
+            </a>
+
+            <a href="12-tabs-routing.html" class="card">
+                <div class="card-icon">📑</div>
+                <div class="card-title">Tabs with Routing</div>
+                <div class="card-description">
+                    Create a tabbed interface using routing for smooth navigation.
+                </div>
+                <span class="badge">Intermediate</span>
+            </a>
+
+            <a href="13-simple-component.html" class="card">
+                <div class="card-icon">🧩</div>
+                <div class="card-title">Simple Component</div>
+                <div class="card-description">
+                    Build reusable UI components with templates.
+                </div>
+                <span class="badge">Beginner</span>
+            </a>
+
+            <a href="14-component-data-binding.html" class="card">
+                <div class="card-icon">🧩</div>
+                <div class="card-title">Component Data Binding</div>
+                <div class="card-description">
+                    Components with reactive data binding for dynamic updates.
+                </div>
+                <span class="badge">Intermediate</span>
+            </a>
+
+            <a href="15-simple-iterator.html" class="card">
+                <div class="card-icon">🔄</div>
+                <div class="card-title">Simple Iterator</div>
+                <div class="card-description">
+                    Loop through arrays and display data automatically.
+                </div>
+                <span class="badge">Beginner</span>
+            </a>
+
+            <a href="16-interactive-iterator.html" class="card">
+                <div class="card-icon">🔄</div>
+                <div class="card-title">Interactive Iterator</div>
+                <div class="card-description">
+                    Add and remove items dynamically with iterators.
+                </div>
+                <span class="badge">Intermediate</span>
+            </a>
+
+            <a href="17-iterator-methods.html" class="card">
+                <div class="card-icon">🔄</div>
+                <div class="card-title">Iterator with Methods</div>
+                <div class="card-description">
+                    Use JavaScript methods and expressions inside loops.
+                </div>
+                <span class="badge">Intermediate</span>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>
+                Each example includes the complete code with explanations.<br>
+                Built with ❤️ using YF Framework
+            </p>
+            <p style="margin-top: 20px;">
+                <a href="quick-reference.html" target="_blank">Quick Reference</a> | 
+                <a href="README.md" target="_blank">View Documentation</a> | 
+                <a href="demo.html" target="_blank">Full Demo</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

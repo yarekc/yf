@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Iterator Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        h1 { color: #667eea; }
+        
+        .item-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .item-info {
+            flex: 1;
+        }
+        .item-info strong {
+            color: #667eea;
+            font-size: 18px;
+        }
+        .item-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #10b981;
+        }
+        .count {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body data-cloak>
+    <h1>🔄 Simple Iterator</h1>
+    <p>Loop through arrays and display data automatically.</p>
+
+    <div class="demo-box">
+        <div class="count">
+            Total Items: {products.length}
+        </div>
+
+        <!-- Iterator: Loop through products array -->
+        <div data-for="products as product">
+            <div class="item-card">
+                <div class="item-info">
+                    <strong>{product.name}</strong>
+                    <p style="margin: 5px 0 0 0; color: #666;">
+                        Category: {product.category}
+                    </p>
+                </div>
+                <div class="item-price">
+                    ${product.price}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px; overflow-x: auto;">
+&lt;!-- Display array length --&gt;
+&lt;div&gt;Total: {products.length}&lt;/div&gt;
+
+&lt;!-- Loop through array with data-for --&gt;
+&lt;div data-for="products as product"&gt;
+  &lt;div class="item-card"&gt;
+    &lt;strong&gt;{product.name}&lt;/strong&gt;
+    &lt;p&gt;Category: {product.category}&lt;/p&gt;
+    &lt;p&gt;${product.price}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  // Define array of products
+  setData('products', [
+    { name: 'Laptop', category: 'Electronics', price: 999 },
+    { name: 'Mouse', category: 'Electronics', price: 29 },
+    { name: 'Desk Chair', category: 'Furniture', price: 199 }
+  ]);
+&lt;/script&gt;</pre>
+
+    <script>
+        // Initialize products array
+        setData('products', [
+            { name: 'Laptop Pro', category: 'Electronics', price: 999 },
+            { name: 'Wireless Mouse', category: 'Electronics', price: 29 },
+            { name: 'Desk Chair', category: 'Furniture', price: 199 },
+            { name: 'Monitor 27"', category: 'Electronics', price: 349 },
+            { name: 'Keyboard', category: 'Electronics', price: 79 }
+        ]);
+    </script>
+</body>
+</html>

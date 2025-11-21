@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component with Data Binding - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        h1 { color: #667eea; }
+        
+        /* Component styles */
+        .user-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .user-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+        }
+        .user-card p {
+            margin: 5px 0;
+            opacity: 0.95;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body data-cloak>
+    <h1>🧩 Component with Data Binding</h1>
+    <p>Components can use reactive data - change the inputs and watch the card update!</p>
+
+    <div class="demo-box">
+        <h3>Edit User Information</h3>
+        
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" data-bind="userName" placeholder="Enter name">
+        </div>
+        
+        <div class="form-group">
+            <label>Job Title:</label>
+            <input type="text" data-bind="userTitle" placeholder="Enter job title">
+        </div>
+        
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" data-bind="userEmail" placeholder="Enter email">
+        </div>
+        
+        <div class="form-group">
+            <label>Location:</label>
+            <input type="text" data-bind="userLocation" placeholder="Enter location">
+        </div>
+
+        <h4 style="margin-top: 30px;">Live Preview:</h4>
+        <!-- Using component with data-bound props -->
+        <profile-card 
+            data-name="userName"
+            data-title="userTitle"
+            data-email="userEmail"
+            data-location="userLocation">
+        </profile-card>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px; overflow-x: auto;">
+&lt;!-- 1. Define component template --&gt;
+&lt;template component="profile-card"&gt;
+  &lt;div class="user-card"&gt;
+    &lt;h3&gt;{name}&lt;/h3&gt;
+    &lt;p&gt;{title}&lt;/p&gt;
+    &lt;p&gt;📧 {email}&lt;/p&gt;
+    &lt;p&gt;📍 {location}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;!-- 2. Bind inputs to data --&gt;
+&lt;input type="text" data-bind="userName"&gt;
+&lt;input type="text" data-bind="userTitle"&gt;
+
+&lt;!-- 3. Use component with data-bound props --&gt;
+&lt;profile-card 
+  data-name="userName"
+  data-title="userTitle"
+  data-email="userEmail"
+  data-location="userLocation"&gt;
+&lt;/profile-card&gt;
+
+&lt;script&gt;
+  // Initialize data
+  setData('userName', 'John Doe');
+  setData('userTitle', 'Web Developer');
+  setData('userEmail', 'john@example.com');
+  setData('userLocation', 'New York, USA');
+&lt;/script&gt;</pre>
+
+    <!-- Component Template Definition -->
+    <template component="profile-card">
+        <div class="user-card">
+            <h3>{name}</h3>
+            <p>{title}</p>
+            <p>📧 {email}</p>
+            <p>📍 {location}</p>
+        </div>
+    </template>
+
+    <script>
+        // Initialize with sample data
+        setData('userName', 'Sarah Johnson');
+        setData('userTitle', 'Senior Developer');
+        setData('userEmail', 'sarah@example.com');
+        setData('userLocation', 'San Francisco, CA');
+    </script>
+</body>
+</html>

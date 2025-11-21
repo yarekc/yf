@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Range Slider Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            cursor: pointer;
+        }
+        .output {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #667eea;
+        }
+        h1 { color: #667eea; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        .value-display {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body data-cloak>
+    <h1>🎚️ Simple Range Slider</h1>
+    <p>Move the slider and watch the value update in real-time.</p>
+
+    <div class="demo-box">
+        <label>Adjust the volume: <strong>{volume}%</strong></label>
+        <input type="range" data-bind="volume" min="0" max="100" step="1">
+
+        <div class="value-display">
+            {volume}%
+        </div>
+
+        <div class="output">
+            <strong>Status:</strong> 
+            {volume == 0 ? '🔇 Muted' : volume < 30 ? '🔉 Low' : volume < 70 ? '🔊 Medium' : '📢 High'}
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px;">
+&lt;input type="range" data-bind="volume" 
+       min="0" max="100" step="1"&gt;
+
+&lt;div&gt;
+  Volume: {volume}%
+&lt;/div&gt;
+
+&lt;div&gt;
+  {volume == 0 ? '🔇 Muted' : 
+   volume &lt; 30 ? '🔉 Low' : 
+   volume &lt; 70 ? '🔊 Medium' : '📢 High'}
+&lt;/div&gt;
+
+&lt;script&gt;
+  setData('volume', 50); // Initialize
+&lt;/script&gt;</pre>
+
+    <script>
+        setData('volume', 50);
+    </script>
+</body>
+</html>

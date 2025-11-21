@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iterator with Methods Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        h1 { color: #667eea; }
+        
+        .user-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .user-card h3 {
+            margin: 0 0 8px 0;
+            color: #667eea;
+        }
+        .user-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .status.active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status.inactive {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body data-cloak>
+    <h1>🔄 Iterator with Methods</h1>
+    <p>Use JavaScript methods inside iterator loops.</p>
+
+    <div class="demo-box">
+        <h3>User Directory</h3>
+        
+        <!-- Loop through users with string methods -->
+        <div data-for="users as user">
+            <div class="user-card">
+                <h3>{user.name.toUpperCase()}</h3>
+                <p>📧 {user.email.toLowerCase()}</p>
+                <p>💼 {user.role}</p>
+                <p>📅 Joined: {user.joined}</p>
+                <span class="status {user.active ? 'active' : 'inactive'}">
+                    {user.active ? '● ACTIVE' : '○ INACTIVE'}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px; overflow-x: auto;">
+&lt;!-- Use methods on array items --&gt;
+&lt;div data-for="users as user"&gt;
+  &lt;div&gt;
+    &lt;!-- String methods --&gt;
+    &lt;h3&gt;{user.name.toUpperCase()}&lt;/h3&gt;
+    &lt;p&gt;{user.email.toLowerCase()}&lt;/p&gt;
+    
+    &lt;!-- Ternary operators --&gt;
+    &lt;span&gt;
+      {user.active ? '● ACTIVE' : '○ INACTIVE'}
+    &lt;/span&gt;
+    
+    &lt;!-- Conditional classes --&gt;
+    &lt;div class="{user.active ? 'active' : 'inactive'}"&gt;
+      Status
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  setData('users', [
+    { 
+      name: 'Alice', 
+      email: 'ALICE@EXAMPLE.COM', 
+      role: 'Admin',
+      joined: '2024-01',
+      active: true 
+    },
+    { 
+      name: 'Bob', 
+      email: 'BOB@EXAMPLE.COM', 
+      role: 'User',
+      joined: '2024-02',
+      active: false 
+    }
+  ]);
+&lt;/script&gt;</pre>
+
+    <script>
+        // Initialize users with mixed case emails
+        setData('users', [
+            { 
+                name: 'Alice Johnson', 
+                email: 'ALICE.JOHNSON@EXAMPLE.COM', 
+                role: 'Administrator',
+                joined: '2024-01-15',
+                active: true 
+            },
+            { 
+                name: 'Bob Smith', 
+                email: 'BOB.SMITH@EXAMPLE.COM', 
+                role: 'Developer',
+                joined: '2024-02-20',
+                active: true 
+            },
+            { 
+                name: 'Charlie Brown', 
+                email: 'CHARLIE.BROWN@EXAMPLE.COM', 
+                role: 'Designer',
+                joined: '2023-11-10',
+                active: false 
+            },
+            { 
+                name: 'Diana Prince', 
+                email: 'DIANA.PRINCE@EXAMPLE.COM', 
+                role: 'Manager',
+                joined: '2024-03-05',
+                active: true 
+            }
+        ]);
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Input Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input:valid {
+            border-color: #4caf50;
+        }
+        input:invalid:not(:placeholder-shown) {
+            border-color: #f44336;
+        }
+        .output {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #667eea;
+        }
+        h1 { color: #667eea; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        .validation {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .valid { background: #d4edda; color: #155724; }
+        .invalid { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body data-cloak>
+    <h1>📧 Simple Email Input</h1>
+    <p>Enter your email address and see validation in action.</p>
+
+    <div class="demo-box">
+        <label>Enter your email:</label>
+        <input type="email" data-bind="userEmail" placeholder="your.email@example.com">
+
+        <div class="output">
+            <strong>You entered:</strong> {userEmail || '(empty)'}
+            
+            <div class="validation {userEmail.includes('@') && userEmail.includes('.') ? 'valid' : 'invalid'}">
+                {userEmail.includes('@') && userEmail.includes('.') ? 
+                 '✅ Valid email format' : 
+                 userEmail.length > 0 ? '❌ Invalid email format' : '⚠️ Please enter an email'}
+            </div>
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px;">
+&lt;input type="email" data-bind="userEmail"&gt;
+
+&lt;div&gt;
+  You entered: {userEmail || '(empty)'}
+&lt;/div&gt;
+
+&lt;div&gt;
+  {userEmail.includes('@') &amp;&amp; userEmail.includes('.') ? 
+   '✅ Valid email format' : 
+   userEmail.length &gt; 0 ? 
+   '❌ Invalid email format' : 
+   '⚠️ Please enter an email'}
+&lt;/div&gt;
+
+&lt;script&gt;
+  setData('userEmail', ''); // Initialize
+&lt;/script&gt;</pre>
+
+    <script>
+        setData('userEmail', '');
+    </script>
+</body>
+</html>

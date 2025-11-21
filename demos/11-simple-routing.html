@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Routing Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        .page {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            min-height: 150px;
+        }
+        .page h2 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        h1 { color: #667eea; }
+    </style>
+</head>
+<body data-cloak>
+    <h1>🗺️ Simple Routing</h1>
+    <p>Click the buttons to navigate between pages.</p>
+
+    <div class="demo-box">
+        <div class="nav-buttons">
+            <button class="btn" onclick="setState('app', 'home')">🏠 Home</button>
+            <button class="btn" onclick="setState('app', 'about')">ℹ️ About</button>
+            <button class="btn" onclick="setState('app', 'contact')">📧 Contact</button>
+        </div>
+
+        <div id="app">
+            <div state="home" class="page">
+                <h2>🏠 Home Page</h2>
+                <p>Welcome to the YF Framework routing demo!</p>
+                <p>Use the buttons above to navigate between different pages.</p>
+            </div>
+
+            <div state="about" class="page">
+                <h2>ℹ️ About Page</h2>
+                <p>YF Framework is a lightweight, reactive JavaScript framework.</p>
+                <p>No build tools, no dependencies - just pure JavaScript!</p>
+            </div>
+
+            <div state="contact" class="page">
+                <h2>📧 Contact Page</h2>
+                <p>Get in touch with us!</p>
+                <p>Email: info@example.com</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px; overflow-x: auto;">
+&lt;!-- Navigation buttons --&gt;
+&lt;button onclick="setState('app', 'home')"&gt;Home&lt;/button&gt;
+&lt;button onclick="setState('app', 'about')"&gt;About&lt;/button&gt;
+&lt;button onclick="setState('app', 'contact')"&gt;Contact&lt;/button&gt;
+
+&lt;!-- Container with ID --&gt;
+&lt;div id="app"&gt;
+  &lt;!-- Each page has a state attribute --&gt;
+  &lt;div state="home"&gt;
+    &lt;h2&gt;Home Page&lt;/h2&gt;
+    &lt;p&gt;Home content...&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div state="about"&gt;
+    &lt;h2&gt;About Page&lt;/h2&gt;
+    &lt;p&gt;About content...&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div state="contact"&gt;
+    &lt;h2&gt;Contact Page&lt;/h2&gt;
+    &lt;p&gt;Contact content...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  // Set initial state
+  setState('app', 'home');
+&lt;/script&gt;</pre>
+
+    <script>
+        // Set initial state to home
+        setState('app', 'home');
+    </script>
+</body>
+</html>

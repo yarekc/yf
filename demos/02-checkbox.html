@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .output {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #667eea;
+        }
+        h1 { color: #667eea; }
+        label { cursor: pointer; }
+    </style>
+</head>
+<body data-cloak>
+    <h1>☑️ Simple Checkbox</h1>
+    <p>Click the checkbox and see the status update automatically.</p>
+
+    <div class="demo-box">
+        <div class="checkbox-container">
+            <input type="checkbox" id="agree" data-bind="agreed">
+            <label for="agree">I agree to the terms and conditions</label>
+        </div>
+
+        <div class="output">
+            <strong>Status:</strong> {agreed ? '✅ Agreed' : '❌ Not agreed'}
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px;">
+&lt;input type="checkbox" data-bind="agreed"&gt;
+
+&lt;div&gt;
+  {agreed ? '✅ Agreed' : '❌ Not agreed'}
+&lt;/div&gt;
+
+&lt;script&gt;
+  setData('agreed', false); // Initialize
+&lt;/script&gt;</pre>
+
+    <script>
+        setData('agreed', false);
+    </script>
+</body>
+</html>

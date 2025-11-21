@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YF Framework - Start Here</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 48px;
+            color: #667eea;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .tagline {
+            text-align: center;
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .path-section {
+            margin-bottom: 30px;
+        }
+        .path-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        .path-section p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        .feature-list li {
+            padding: 10px 0;
+            color: #666;
+            font-size: 16px;
+        }
+        .feature-list li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .quick-link {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+        }
+        .quick-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+        }
+        .quick-link-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .quick-link-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 YF Framework</h1>
+        <p class="tagline">Simple • Reactive • Powerful</p>
+
+        <div class="path-section">
+            <h2>👋 Welcome!</h2>
+            <p>
+                You've discovered YF Framework - a lightweight JavaScript framework that makes 
+                building reactive web applications simple and fun. No build tools, no complexity, 
+                just pure JavaScript magic.
+            </p>
+        </div>
+
+        <div class="path-section">
+            <h2>🚀 What You Get</h2>
+            <ul class="feature-list">
+                <li><strong>17 Simple Demos</strong> - Each teaching one concept clearly</li>
+                <li><strong>Progressive Learning</strong> - Start simple, grow gradually</li>
+                <li><strong>Copy & Paste Ready</strong> - Use code immediately in your projects</li>
+                <li><strong>Quick Reference</strong> - Visual cheat sheet for syntax</li>
+                <li><strong>Complete Documentation</strong> - Everything you need to know</li>
+            </ul>
+        </div>
+
+        <div class="path-section">
+            <h2>🎯 Choose Your Path</h2>
+            <div class="buttons">
+                <a href="index.html" class="btn">
+                    📚 Browse All Demos
+                </a>
+                <a href="quick-reference.html" class="btn btn-secondary">
+                    ⚡ Quick Reference
+                </a>
+            </div>
+        </div>
+
+        <div class="path-section">
+            <h2>📖 Additional Resources</h2>
+            <div class="quick-links">
+                <a href="DEMOS-GUIDE.md" class="quick-link">
+                    <div class="quick-link-icon">📘</div>
+                    <div class="quick-link-title">Learning Guide</div>
+                </a>
+                <a href="README.md" class="quick-link">
+                    <div class="quick-link-icon">📄</div>
+                    <div class="quick-link-title">Full Docs</div>
+                </a>
+                <a href="PACKAGE-SUMMARY.md" class="quick-link">
+                    <div class="quick-link-icon">📦</div>
+                    <div class="quick-link-title">Package Info</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="path-section" style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px solid #eee;">
+            <p style="color: #999; font-size: 14px;">
+                Built with ❤️ for developers who want simplicity without sacrificing power
+            </p>
+        </div>
+    </div>
+</body>
+</html>

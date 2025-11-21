@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Component Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        h1 { color: #667eea; }
+        
+        /* Component styles */
+        .alert-card {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+        }
+        .alert-card.success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+        .alert-card.warning {
+            background: #fef3c7;
+            color: #92400e;
+            border-left: 4px solid #f59e0b;
+        }
+        .alert-card.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
+        }
+        .alert-card.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border-left: 4px solid #3b82f6;
+        }
+        .icon {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body data-cloak>
+    <h1>🧩 Simple Component</h1>
+    <p>Create reusable UI components with templates.</p>
+
+    <div class="demo-box">
+        <h3>Alert Messages</h3>
+        
+        <!-- Using the component with different types -->
+        <alert-message type="success" message="Your changes have been saved successfully!"></alert-message>
+        <alert-message type="warning" message="Your session will expire in 5 minutes."></alert-message>
+        <alert-message type="error" message="Failed to connect to the server."></alert-message>
+        <alert-message type="info" message="Check out our new features in the settings panel."></alert-message>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px; overflow-x: auto;">
+&lt;!-- 1. Define the component template --&gt;
+&lt;template component="alert-message"&gt;
+  &lt;div class="alert-card {type}"&gt;
+    &lt;span class="icon"&gt;
+      {type == 'success' ? '✅' : 
+       type == 'warning' ? '⚠️' : 
+       type == 'error' ? '❌' : 'ℹ️'}
+    &lt;/span&gt;
+    &lt;span&gt;{message}&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;!-- 2. Use the component multiple times --&gt;
+&lt;alert-message 
+  type="success" 
+  message="Changes saved!"&gt;
+&lt;/alert-message&gt;
+
+&lt;alert-message 
+  type="error" 
+  message="Connection failed!"&gt;
+&lt;/alert-message&gt;</pre>
+
+    <!-- Component Template Definition -->
+    <template component="alert-message">
+        <div class="alert-card {type}">
+            <span class="icon">
+                {type == 'success' ? '✅' : type == 'warning' ? '⚠️' : type == 'error' ? '❌' : 'ℹ️'}
+            </span>
+            <span>{message}</span>
+        </div>
+    </template>
+</body>
+</html>

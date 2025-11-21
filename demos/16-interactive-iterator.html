@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Iterator Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        h1 { color: #667eea; }
+        
+        .add-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .add-form input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background: #5568d3;
+        }
+        .btn-delete {
+            background: #ef4444;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        .btn-delete:hover {
+            background: #dc2626;
+        }
+        
+        .task-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #667eea;
+        }
+        .task-text {
+            flex: 1;
+            font-size: 16px;
+        }
+        .count {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .empty-message {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body data-cloak>
+    <h1>🔄 Interactive Iterator</h1>
+    <p>Add and remove items dynamically.</p>
+
+    <div class="demo-box">
+        <div class="add-form">
+            <input type="text" 
+                   data-bind="newTask" 
+                   placeholder="Enter a task..."
+                   onkeypress="if(event.key==='Enter') addTask()">
+            <button class="btn" onclick="addTask()">➕ Add Task</button>
+        </div>
+
+        <div class="count">
+            Total Tasks: {tasks.length}
+        </div>
+
+        <!-- Show message when empty -->
+        <div show="{tasks.length == 0}" class="empty-message">
+            📝 No tasks yet. Add one above!
+        </div>
+
+        <!-- Loop through tasks -->
+        <div data-for="tasks as task">
+            <div class="task-item">
+                <div class="task-text">
+                    {task.text}
+                </div>
+                <button class="btn btn-delete" onclick="deleteTask({task.id})">
+                    🗑️ Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px; overflow-x: auto;">
+&lt;!-- Input for new task --&gt;
+&lt;input type="text" data-bind="newTask"&gt;
+&lt;button onclick="addTask()"&gt;Add&lt;/button&gt;
+
+&lt;!-- Show count --&gt;
+&lt;div&gt;Total: {tasks.length}&lt;/div&gt;
+
+&lt;!-- Show when empty --&gt;
+&lt;div show="{tasks.length == 0}"&gt;No tasks yet!&lt;/div&gt;
+
+&lt;!-- Loop through tasks --&gt;
+&lt;div data-for="tasks as task"&gt;
+  &lt;div&gt;
+    {task.text}
+    &lt;button onclick="deleteTask({task.id})"&gt;Delete&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  let nextId = 1;
+  setData('tasks', []);
+  
+  function addTask() {
+    const text = getData('newTask');
+    if (!text.trim()) return;
+    
+    const tasks = getData('tasks');
+    setData('tasks', [
+      ...tasks,
+      { id: nextId++, text: text }
+    ]);
+    setData('newTask', '');
+  }
+  
+  function deleteTask(id) {
+    const tasks = getData('tasks');
+    setData('tasks', tasks.filter(t =&gt; t.id !== id));
+  }
+&lt;/script&gt;</pre>
+
+    <script>
+        let nextId = 1;
+        
+        // Initialize with empty array
+        setData('tasks', []);
+        setData('newTask', '');
+
+        function addTask() {
+            const text = getData('newTask');
+            if (!text.trim()) return;
+
+            const tasks = getData('tasks');
+            setData('tasks', [
+                ...tasks,
+                { id: nextId++, text: text }
+            ]);
+            setData('newTask', '');
+        }
+
+        function deleteTask(id) {
+            const tasks = getData('tasks');
+            setData('tasks', tasks.filter(t => t.id !== id));
+        }
+    </script>
+</body>
+</html>

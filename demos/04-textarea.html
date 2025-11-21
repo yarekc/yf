@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textarea Demo - YF Framework</title>
+    <script src="yf.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .demo-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+        }
+        .output {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #667eea;
+        }
+        h1 { color: #667eea; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        .char-count {
+            text-align: right;
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body data-cloak>
+    <h1>📝 Simple Textarea</h1>
+    <p>Type in the textarea and watch the character count update.</p>
+
+    <div class="demo-box">
+        <label>Write your message:</label>
+        <textarea data-bind="message" rows="5" placeholder="Type your message here..."></textarea>
+        
+        <div class="char-count">
+            Character count: <strong>{message.length}</strong>
+        </div>
+
+        <div class="output">
+            <strong>Your message:</strong><br>
+            {message || '(empty)'}
+        </div>
+    </div>
+
+    <h2>How it works:</h2>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px;">
+&lt;textarea data-bind="message" rows="5"&gt;&lt;/textarea&gt;
+
+&lt;div&gt;
+  Character count: {message.length}
+&lt;/div&gt;
+
+&lt;div&gt;
+  Your message: {message || '(empty)'}
+&lt;/div&gt;
+
+&lt;script&gt;
+  setData('message', ''); // Initialize
+&lt;/script&gt;</pre>
+
+    <script>
+        setData('message', '');
+    </script>
+</body>
+</html>
